@@ -3,6 +3,7 @@ package scheduleGenerator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -47,57 +48,19 @@ public class CalendarGUI extends javax.swing.JFrame {
 	}
 
 	private void setTitleMonth(int n, int year) {
-		switch (n) {
-		case (1):
-			this.monthTitle.setText("January " + year);
-			this.monthName = "January " + year;
-			break;
-		case (2):
-			this.monthTitle.setText("February " + year);
-			this.monthName = "February " + year;
-			break;
-		case (3):
-			this.monthTitle.setText("March " + year);
-			this.monthName = "March " + year;
-			break;
-		case (4):
-			this.monthTitle.setText("April " + year);
-			this.monthName = "April " + year;
-			break;
-		case (5):
-			this.monthTitle.setText("May " + year);
-			this.monthName = "May " + year;
-			break;
-		case (6):
-			this.monthTitle.setText("June " + year);
-			this.monthName = "June " + year;
-			break;
-		case (7):
-			this.monthTitle.setText("July " + year);
-			this.monthName = "July " + year;
-			break;
-		case (8):
-			this.monthTitle.setText("August " + year);
-			this.monthName = "August " + year;
-			break;
-		case (9):
-			this.monthTitle.setText("September " + year);
-			this.monthName = "September " + year;
-			break;
-		case (10):
-			this.monthTitle.setText("October " + year);
-			this.monthName = "October " + year;
-			break;
-		case (11):
-			this.monthTitle.setText("November " + year);
-			this.monthName = "November " + year;
-			break;
-		case (12):
-			this.monthTitle.setText("December " + year);
-			this.monthName = "December " + year;
-			break;
-
-		}
+		
+		// SWAP 1, TEAM 03
+		
+		// QUALITY CHANGES
+		// Used the built in Java library instead of a giant switch statement.
+		
+		DateFormatSymbols dfs = new DateFormatSymbols();
+		String[] months = dfs.getMonths();
+		String month = months[n - 1];
+		
+		this.monthTitle.setText(month + " " + year);
+		this.monthName = month + " " + year;
+		
 	}
 
 	/**
@@ -348,23 +311,17 @@ public class CalendarGUI extends javax.swing.JFrame {
 	}
 
 	private String getNameforNum(int n) {
-		switch (n) {
-		case (1):
-			return "Sunday";
-		case (2):
-			return "Monday";
-		case (3):
-			return "Tuesday";
-		case (4):
-			return "Wednesday";
-		case (5):
-			return "Thursday";
-		case (6):
-			return "Friday";
-		case (7):
-			return "Saturday";
-		}
-		return null;
+		
+		// SWAP 1, TEAM 03
+		
+		// QUALITY CHANGES
+		// Used the built in Java library instead of a giant switch statement.
+		
+		DateFormatSymbols dfs = new DateFormatSymbols();
+		String[] days = dfs.getWeekdays();
+		String day = days[n - 1];
+		
+		return day;
 	}
 
 	private void initComponents() {

@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//SWAP 1, TEAM 03
+
+// BAD SMELLS
+// Data Class
+// This class is mainly used for data storage and retrieval. There isn't much "functionality". Moving some behavior to the class would solve the issue.
+
 /**
  * A worker contains days available to work with jobs.
  *
