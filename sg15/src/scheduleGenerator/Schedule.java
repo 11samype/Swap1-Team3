@@ -211,8 +211,9 @@ public class Schedule extends Thread implements Serializable {
 	private ArrayList<Worker> findWorkersForJob(Worker worker, Day day, String job, ArrayList<String> workersWorking, ArrayList<Worker> workersForJob) {
 		Day workerDay = worker.getDayWithName(day
 				.getNameOfDay());
-		if (workerDay.getJobs().contains(job)
-				&& !workersWorking.contains(worker
+		// SWAP 1, TEAM 03
+		//Removed some logic to implement the bonus feature so that it adds all works to the job so it can select the one that has worked last.
+		if (!workersWorking.contains(worker
 						.getName())) {
 			workersForJob.add(worker);
 

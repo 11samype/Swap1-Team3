@@ -623,8 +623,12 @@ public class CalendarGUI extends javax.swing.JFrame {
 
 	/*
 	 * SWAP 1, TEAM 03
-	 * BAD SMELL: Example of Speculative Generality because the
+	 * 
+	 * BAD SMELL: 
+	 * Example of Speculative Generality because the
 	 * method exists but is not implemented or used in any of the code.
+	 * 
+	 * Remove this method or implement it and use it in the program
 	 */
 	/**
 	 * @param evt
