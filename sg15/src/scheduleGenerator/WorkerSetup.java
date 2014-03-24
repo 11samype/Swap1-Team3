@@ -12,13 +12,6 @@ import javax.swing.*;
  * and open the template in the editor.
  */
 
-//SWAP 1, TEAM 03
-
-// BAD SMELLS
-// Divergent Change
-// This class seems to have bulked up with a lot of features that should be delegated to different classes.
-// 
-
 /**
  * 
  * @author schneimd
@@ -81,12 +74,6 @@ public class WorkerSetup extends javax.swing.JFrame {
 		initComponents();
 		addWorker();
 	}
-	
-	// SWAP 1, TEAM 03
-	
-	// BAD SMELLS
-	// Long Method
-	// Should break it up into logical chunks that do single tasks, place these chunks into new functions.
 
 	private void addWorker() {
 		this.days = Main.getDays();
