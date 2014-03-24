@@ -27,12 +27,17 @@ import javax.swing.JTextField;
  * This is an example of Large Class. This class is responsible 
  * for creating and formating all the pieces on the Config window 
  * as well as creating the handlers and code for the events.
+ * To fix this issue you would move parts of this class to its 
+ * own classes such as the tabs that are created for each weekday.
  * 
  * BAD SMELL: Shotgun Surgery
  * This class creates 7 different tabs that all do pretty much the same 
  * thing and infact look identical. Therefore if you want to, say change 
  * the look of the tabs, you have to go through and make the change for 
  * every tab.
+ *  * To fix this issue you would move parts of this class to its 
+ * own classes such as the tabs that are created for each weekday and 
+ * then just created a new day tab and then all the code will be in the same spot
  */
 /**
  * 
@@ -57,6 +62,9 @@ public class Config extends javax.swing.JFrame {
 		initComponents();
 
 		// SWAP, 1 TEAM: 03
+		//
+		// QUALITY CHANGES
+		//
 		// Removed the if statement inside of the loop because it all did the
 		// same stuff except for the do click
 		// which i moved to a new method called performClickForDay()
@@ -77,6 +85,9 @@ public class Config extends javax.swing.JFrame {
 	}
 
 	// SWAP, 1 TEAM: 03
+	//
+	// QUALITY CHANGES
+	//
 	// Created this method to allow the loop in the method above to remove some
 	// of the duplicate code
 	// This overcame the duplicated code Bad code smell
@@ -429,9 +440,13 @@ public class Config extends javax.swing.JFrame {
 
 	/*
 	 * SWAP 1, TEAM 03
-	 * BAD SMELL: Duplicated Code
+	 * 
+	 * BAD SMELL:
+	 * Duplicated Code
 	 * This method, as well as the following 6, all repeat pretty much 
 	 * the same code but use specific fields depending on the type of tab.
+	 * To Fix I would move the duplicate code to its own method and have all 
+	 * the places that use it call the new method
 	 */
 	/**
 	 * @param evt
@@ -485,6 +500,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -557,6 +575,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -629,6 +650,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -702,6 +726,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -777,6 +804,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -851,6 +881,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -924,6 +957,9 @@ public class Config extends javax.swing.JFrame {
 					});
 
 			// SWAP, 1 TEAM: 03
+			//
+			// QUALITY CHANGES
+			//
 			// Moved the duplicate code into a method for setting the Horizontal
 			// and vertical tab groups
 			// This overcame the duplicated code Bad code smell
@@ -946,6 +982,9 @@ public class Config extends javax.swing.JFrame {
 	}
 
 	// SWAP, 1 TEAM: 03
+	//
+	// QUALITY CHANGES
+	//
 	// Moved the duplicate code for setting the vertical tab group into this
 	// method
 	// This overcame the duplicated code Bad code smell
@@ -998,6 +1037,9 @@ public class Config extends javax.swing.JFrame {
 	}
 
 	// SWAP, 1 TEAM: 03
+	//
+	// QUALITY CHANGES
+	//
 	// Moved the duplicate code for setting the horizontal tab group into this
 	// method
 	// This overcame the duplicated code Bad code smell

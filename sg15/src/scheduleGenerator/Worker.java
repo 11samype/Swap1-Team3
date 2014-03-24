@@ -56,6 +56,10 @@ public class Worker implements Serializable{
 	 * @param jobName
 	 */
 	public void addWorkedJob(String jobName) {
+		Integer i = this.timesWorked.get(jobName);
+		if(i == null){
+			this.timesWorked.put(jobName, 0);
+		}
 		this.timesWorked.put(jobName, this.timesWorked.get(jobName).intValue() + 1);
 	}
 	
@@ -66,7 +70,17 @@ public class Worker implements Serializable{
 	 * @return number of tims job has been worked.
 	 */
 	public int numWorkedForJob(String jobName) {
-		return this.timesWorked.get(jobName);
+		// SWAP 1, TEAM 03
+		//
+		//BONUS FEATURE
+		//
+		//This method now returns the number of days worked for all positions
+		int count = 0;
+		for (String s : timesWorked.keySet()){
+			count += this.timesWorked.get(s);
+		}
+		
+		return count;
 	}
 	
 	/**
