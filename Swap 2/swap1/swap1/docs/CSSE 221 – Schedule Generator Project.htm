@@ -1,0 +1,448 @@
+<!--?xml version="1.0" encoding="ISO-8859-1"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en"><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title> CSSE 221 – Schedule Generator Project </title> 
+	<link rel="stylesheet" rev="stylesheet" href="CSSE%20221%20%E2%80%93%20Schedule%20Generator%20Project_files/style.css" type="text/css">
+</head>
+<body>
+<h1> Schedule Generator Project </h1> 
+
+<h3> <a name="overview"> Overview </a> </h3> 
+
+For this project you will design and develop a flexible and ambitious 
+project, customized to your taste. Working in the teams assigned in 
+class, you will create a series of documents supporting your work and 
+implement the project fully. 
+
+You will develop a <b>Schedule Generator</b> that is flexible and 
+customizable, and is able to satisfy the monthly scheduling needs of 
+organizations that hold meetings regularly.  The schedules generated 
+should be random, fair, and editable by the organizations that use them.
+ Below are a few scenarios in which your schedule generator could be 
+useful.
+
+<h4> Company Business Meetings</h4>
+
+Consider company <em>X Inc.</em> that conducts business meetings twice 
+or three times a week.  At each meeting the executives assume different 
+roles or responsibilities.  Suppose the responsibilities performed at 
+each meeting include <i>chair</i>, <i>announcer</i>, <i>scribe/transcriber</i>, <i>recorder</i>, <i>presenter</i>, and <i>facilitator/planner</i>. There may be up to five presentations at a meeting, but each presentation is done by a different executive.
+
+<p> Each executive is able to specify the responsibilities that he/she 
+is comfortable performing at a business meeting.  These preferences are 
+collated and stored in a manner that is easily accessible and modifiable
+ when needed. <em>X Inc.</em> would like to use your <b>Schedule Generator</b> to generate monthly schedules for its business meetings.
+</p>
+
+<h4> Church Worship Schedule</h4>
+
+The <em>Church on the Block</em> meets three times a week, twice on 
+Sunday and once on Wednesday, for worship and Bible study. The men play 
+various roles on the days that the church meets. Roles include leading 
+songs, leading opening prayer, leading closing prayer, overseeing 
+communion, assisting with communion, doing scripture reading, and 
+announcing. All roles are not played at every meeting.
+
+<p>The men of the congregation are able to express their preferences and
+ availably for performing the various roles in worship and Bible study. 
+These preferences are easily accessible and maintainable when needed. <em>Church on the Block</em> would like to use your <b>Schedule Generator</b> to generate monthly schedules for its meetings.  <a href="http://www.rose-hulman.edu/class/csse/csse221/current/Projects/ScheduleGenerator/SampleSchedule.pdf">Here is a sample schedule </a>that represents the type of schedules that <em>Church on the Block</em> uses to manage its meetings.</p>
+
+
+<h3> <a name="requirements"> Technical Requirements </a> </h3> 
+
+Your project attempts to solve a real-world problem for businesses and 
+organizations that meet frequently and would prefer not generate meeting
+ schedules by hand.  This is a complex constraint-optimization problem 
+that is not easy to solve.  However, a solid solutions will honor the 
+following technical constraints: 
+
+<ul>
+<li>It must be a schedule generator that is usable by some real-world organization.</li>
+<li> It must have an interactive component (changing configurations, 
+schedule parameters, number of months for which to generate schedule, 
+output format, etc).
+</li><li>IT must have a GUI that is intuitive to use -- for example, I can use it without verbal instruction.</li>
+<li>It must use multithreading in a natural way, for example, for minimizing constraints.</li>
+<li> It must make non-trivial use of at least one data structure that isn't an array or ArrayList.</li>
+<li>Your instructor must approve your design, after discussions with you.</li>
+</ul>
+
+<h3> Administrative Background </h3> <h4> Team Assignment </h4> 
+<p>
+	This is a team assignment. My intention is not that you “divide and 
+conquer” as much as that you have people to talk with as you write and 
+test this program. 
+</p>
+<p>
+	Everything that you submit for this project should be understood by all
+ team members. It is your responsibility to (a) not submit anything 
+without first discussing it with your teammates, and (b) not let 
+something your teammates write go “over your head” without making a 
+strong effort to understand it (including having a teammate explain it 
+to you, of course). 
+</p>
+
+<h4> Subversion Repository </h4> 
+<p>
+	Your SVN repository for this assignment is: </p><pre>    http://svn.csse.rose-hulman.edu/repos/csse221-201410-sg<em>XX</em>
+</pre> where <em> XX </em> is your team number given <a href="http://www.rose-hulman.edu/class/csse/csse221/current/Projects/ScheduleGenerator/ScheduleGeneratorTeams.html">here</a>. You should check out the
+<code> ScheduleGenerator </code>project from this repository, and all 
+subsequent work should be placed in this project folder and committed 
+back to your repository.
+ 
+<h3> Deliverables </h3> 
+<p>
+	Milestone dates are listed in the table below. The rest of this section
+ describes the artifacts due at each milestone. Follow the instructions 
+carefully. Your team may want to print a copy of this document, 
+highlight the key things to do, and check them off as you do them. 
+</p>
+<h4> Project Schedule and Milestones </h4> 
+<table class="bordered">
+	<tbody><tr>
+		<th class="bordered">
+			Cycle 
+		</th>
+		<th class="bordered">
+			Due Date 
+		</th>
+		<th class="bordered">
+			Deliverables 
+			<br>
+			<span class="note">(due at start of class on the given date unless 
+			specified)</span> 
+		</th>
+	</tr>
+	<tr>
+		<td class="bordered">
+			Cycle 0 
+		</td>
+		<td class="bordered">
+			Tues, Oct. 29</td>
+		<td class="bordered">
+			End of class: <a href="#Design">CRC Cards, UML Class Diagram</a>, <a href="#UserStories">Cycle 1 User Stories</a> 
+		</td>
+	</tr>
+	<tr>
+		<td class="bordered">
+			Cycle 1 
+		</td>
+		<td class="bordered">
+			Fri, Nov. 1</td>
+		<td class="bordered">
+			<a href="#StatusReports">Cycle 1 Status Report</a>, Cycle 2 User Stories 
+		</td>
+	</tr>
+	<tr>
+		<td class="bordered">
+			Cycle 2 
+		</td>
+		<td class="bordered">
+			Tues, Nov. 5</td>
+		<td class="bordered">
+			Cycle 2 Status Report, Cycle 3 User Stories 
+		</td>
+	</tr>
+	<tr>
+		<td class="bordered">
+			Cycle 3 
+		</td>
+		<td class="bordered">
+			Fri, Nov. 8 
+		</td>
+		<td class="bordered">
+			Cycle 3 Status Report, Cycle 4 User Stories 
+		</td>
+	</tr>
+	<tr>
+		<td class="bordered">
+			Cycle 4 
+		</td>
+		<td class="bordered">
+			Tues, Nov. 12
+		</td>
+		<td class="bordered">
+			Cycle 4 Status Report, Final working software 
+		</td>
+	</tr>
+	<tr>
+		<td class="bordered">
+			— 
+		</td>
+		<td class="bordered">
+			Wed, Nov. 13</td>
+		<td class="bordered">
+						<a href="#Presentation">Project Presentation</a>,  <a href="http://www.rose-hulman.edu/class/csse/csse221/current/Projects/ScheduleGenerator/presentationSchedule.html">Presentation schedule</a></td>
+	</tr>
+	<tr>
+		<td class="bordered">
+			— 
+		</td>
+		<td class="bordered">
+			Thurs, Nov. 14</td>
+		<td class="bordered">
+			<a href="#Survey">Team evaluation survey</a> 
+		</td>
+	</tr>
+</tbody></table>
+
+<p>Because you will need some time to prepare capsule 
+presentations, I will let your team 
+skip any one of Cycles 1-3 during the project. Just commit a file named 
+CycleXskip.txt to your Design folder to let me know. In any case, the final 
+project is still due on October 31. I do not plan to assign written homework during 
+this time period, but there is an exam, and there will be about an hour of videos 
+on C programming to watch to prepare for class on Oct. 30.</p>
+
+
+<h4><a name="Design">CRC Cards and UML Class Diagram</a></h4>
+<h4> CRC Cards and UML Class Diagram </h4> 
+<p>
+	You must use the object-oriented design technique discussed in the book
+ and in class to generate CRC Cards and a UML Class Diagram for your 
+project. Name your class with the <code> main() </code> method <code> Main</code>. 
+</p>
+<p>
+	Before brainstorming candidate classes, you will probably find it helpful to 
+	do two things. First, decide as a team which features (see
+	<a href="#features"> Features</a>&nbsp;below) sound most interesting 
+	to do and which you'll want to do first. Second, make some sketches of potential screen layouts for your project.</p>
+<p>
+		You must draw your UML Class Diagram using <strong class="red"><a href="http://www.umlet.com/">UMLet</a></strong>.
+</p>
+<h5> To be turned in: </h5> 
+<p>
+	Your CRC cards (index cards are OK, nothing electronic)</p>
+<p>
+		Your UML Class Diagram, drawn using <strong class="red"><a href="http://www.umlet.com/">UMLet</a></strong> 
+		or a similar program. Save it in your Eclipse 
+	project, replacing the existing UML.uxf document in the <em> Planning 
+	</em> folder, and commit it. You should save also a pdf version of your UML diagram in your Planning folder.
+</p>
+<h4><a name="UserStories">User Stories</a></h4> 
+<p>
+	Short development cycles are a key feature of Extreme Programming. 
+	This is especially useful for projects where the development 
+team—that’s you—is unfamiliar with the problem to be solved. 
+	At the start of each development cycle, the team negotiates with the 
+customer on the work to be accomplished during that cycle. 
+</p>
+<p>
+	The customer suggests <em> user stories </em> to be completed. These are short, often one sentence, 
+	descriptions of what the user would be able to do with the software. Using a drawing program as an example, 
+</p>
+<blockquote>
+	User launches program and sees a blank drawing area and some buttons representing actions that could be taken. 
+</blockquote>
+<p>
+	This story doesn’t say anything about the buttons actually working, so 
+that is not part of this user story. A user story for a button working 
+might be something like, 
+</p>
+<blockquote>
+	User clicks the Rectangle button and can then draw a rectangle in the drawing area by clicking and dragging the mouse. 
+</blockquote>
+<p>
+	User stories are powerful in two important ways. First, they make it 
+very clear how to test whether the story has been completed. Second, 
+they keep the development team focused on the importance of meeting the 
+needs of the user. 
+</p>
+<p>
+	After the customer has suggested some user stories for the cycle, the 
+development team will decide whether it is reasonable to complete them 
+all in the time available. If not, the customer will withdraw some of 
+the proposed stories until an achievable set of stories is agreed upon. 
+</p>
+<p>
+	For this assignment you’ll play both the customer role and that of the 
+development team. As a customer, the number of features completed will 
+help determine your grade (and how much fun you have with the project). 
+As a development team, you’ll have to do the work to implement the user 
+stories. 
+</p>
+<p>
+	Each user story should have an estimate in ideal development time (likely between 30 mins and 4 hours). 
+	Calculate the total estimated time for this cycle and include it at the end 
+	of the list.</p>
+
+
+
+<h5> To be turned in:</h5> 
+<p>
+	At the <strong>start</strong> of <strong>each</strong> development 
+cycle, you will commit a text document to your project repository 
+listing the user stories that you plan to complete during that cycle. 
+	You can use the existing documents in your Eclipse project, in the <code> Planning </code> folder, named “Cycle <em> N </em> User Stories.txt”, where <em> N </em> is the cycle number. 
+	Commit the file to your repository. 
+</p>
+<h4><a name="StatusReports">Status Reports</a>, Code-in-progress, and Team Evaluations</h4> 
+<p>
+	At the end of each development cycle, you will commit a text document to your project repository 
+	that lists the user stories and estimated times, then add the <em>actual 
+	time</em> you spent on each. Indicate either that you completed all of 
+the 
+	user stories for the cycle or else list any user stories the team 
+planned to complete but was not able to. Briefly state any complications
+ that prevented you from completing the stories, for example, “We 
+underestimated how hard it would be to implement input processing.” 
+</p>
+<p>
+	You can just modify the document named “Cycle <em> N </em>Status 
+	Report.txt”, where <em> N </em> is the cycle number just completed, in the <code> Planning </code> folder. 
+	Commit the file to your repository. 
+</p>
+	
+	
+	<p>
+	You should be using good process as you go. Thus, for each cycle, your code 
+	must run, have good style and complete documentation. It should also have no other 
+	warnings, but sometimes these are inevitable (like if you have declared a 
+	variable you will use in the next cycle).</p>
+<p>
+	You must also complete the brief evaluation on Moodle identifying areas of 
+	improvement for your team.</p>
+	
+<h4> Final Working Software</h4> 
+<p>
+	We’ll grade the version of your software committed to your repository 
+at the Project Presentation deadline. Your code should be well-commented
+ and should use appropriate class, method, field, and variable names. No
+ Eclipse warnings should remain for your final code according to our 
+standard Eclipse preferences for CSSE 221. The <a href="http://www.rose-hulman.edu/class/csse/csse221/current/Projects/ScheduleGenerator/ExtremeProgrammingPractices.htm">Rules and Practices of Extreme Programming</a> provide some excellent tips for engineering your solution. 
+</p>
+<h5> Some comments on Subversion and team projects: </h5> 
+<p>
+	Commit your code often. And don’t forget to update your code before 
+working and before committing. The chances of SVN conflicts grow 
+exponentially with the number of team members, but they decrease with 
+the number of lines of code in the project. The net result is that 
+you’ll have more trouble at the beginning of a project. For this reason 
+it makes a lot of sense to program as a group or to carefully work on 
+completely different classes in the beginning. 
+</p>
+
+<h4><a name="Presentation">Presentation</a></h4> 
+<p>
+	Your team will give a 10 minute presentation on your project, which 
+will be open to the Rose-Hulman community. Your goals for this 
+presentation are: 
+</p>
+<ul>
+	<li> Confidently and professionally describe your results.</li>
+	<li> Demonstrate how a user of your software could use it to accomplish
+ a satisfactory set of schedules for the meetings of their organization.
+ </li>
+	<li> Demonstrate a sampling of the required and additional features that you’ve implemented. </li>
+	<li> Show off bonus features that you’ve implemented. </li>
+	<li> Describe the basic design of your system and discuss the amount of cohesion and coupling in your design. </li>
+</ul>
+<p>
+
+Every team member should play a significant role in the delivery of your presentation.</p>
+
+<h4><a name="Survey">Team Evaluation and Individual Reflection</a></h4> 
+<p>
+	We will post a team evaluation survey on Moodle. You will receive 
+individual points for completing the survey. I will also use the survey 
+results to help decide whether to give different assignment scores to 
+different team members. Perhaps most importantly, the survey results 
+will help me identify where you are doing well as a teammate and where 
+you can improve. 
+	Along with this is an individual reflection. It helps you introspect on
+ what went well in the project and how you can do even better on your 
+next project. You will be graded on the thoughtfulness of your answers. 
+ 
+</p>
+<h3> <a name="grading"> Grading</a></h3> 
+<p>
+	The subsequent subsections list the features that your program is 
+required to have and several potential additional features. An “A” 
+project would include all of the required and additional features. A 
+team that delivers all of the milestones, well done and on time, and 
+produces a project that correctly implements all the required features 
+will earn at least 70% on this assignment. 
+</p>
+
+<p>
+A <a href="http://www.rose-hulman.edu/class/csse/csse221/current/Projects/ScheduleGenerator/ScheduleGeneratorEvaluation.docx">Project Evaluation Form</a>
+ that we plan to use to evaluate your project is available for you to 
+fill. You must enter your team information, check the features you 
+implemented, and describe other notable features that you added to your 
+design.  This sheet must be handed to your instructor when you give your
+ project presentation.   
+</p>
+
+
+<h3>
+	<a name="features"> Features </a> 
+</h3>
+<p>
+	The subsequent subsections list the features that your program is 
+required to have and several potential additional features. At this 
+point, my thought is that an “A” project would include all of the 
+required and additional features. A team that delivers all of the 
+milestones, well done and on time, and produces a project that correctly
+ implements all the required features will earn at least 70% on this 
+assignment. 
+</p>
+
+<h4>
+	Required Features 
+</h4>
+<p>
+	A successful program must include all of the following features: 
+</p>
+<ul class="checklist">
+	<li> Ability to use a configuration file that specifies the roles or 
+responsibilities that can be performed and details weekly meeting times.
+ </li>
+	<li> Ability to use a list of preferences and availabilities to generate a random monthly schedule.  </li>
+	<li> Ability to schedule each person no more than once for a given meeting. </li>
+	<li> Ability to schedule individuals for only when they are available.. </li>
+	<li> Ability to display generated in a manner that is accessible. </li>
+	<li> Ability to save generated schedule to a file that can later be read by the user. </li>
+</ul>
+<h4>
+	Additional Features 
+</h4>
+<p>
+	Once your team completes the required features, you should try to 
+complete as many of these additional features as time permits. 
+</p>
+<ul class="checklist">
+	<li> Ability to generate random schedules for multiple months at a time. </li>
+	<li> Ability to schedule each person to perform different roles instead of repeating the same roles. </li>
+	<li> Ability to display generated schedule in an editable format. </li>
+	<li> Ability to display generated schedule as a customized web page. </li>
+	<li> Ability to keep a history of schedules that have been generated for review and comparison.</li>
+</ul>
+<h4>
+	Bonus Features 
+</h4>
+<p>
+	If your team completes all of the required and additional features 
+above, then you can implement some of these bonus features. I’ll only 
+award bonus points for these if all of the required and additional 
+features are also implemented correctly. 
+</p>
+<ul class="checklist">
+	<li> Ability to schedule each person at least once before repeating a 
+person. This gives every person a chance to get scheduled and no one is 
+missed.  </li>
+	<li> Ability to schedule each person no more than once for a particular
+ role before everybody who desires to perform that role is scheduled to 
+do so. </li>
+	<li> Ability to schedule some (specified) individuals in their own 
+separate rotation (e.g., Rich and Tom should be scheduled to do 
+announcements each month, while the other announcers keep a normal 
+rotation for the remaining slots). </li>
+	<li> Accept personal calendars and not schedule individuals when they are not available. </li>
+
+</ul>
+
+
+
+
+</body></html>
