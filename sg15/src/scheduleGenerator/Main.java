@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
+
 /**
  * This class handles the interaction of one frame to another as well as
  * handling initialization.
@@ -41,7 +43,21 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		path = new File("schedule_data.ser");
+		
+		// SWAP 1 TEAM 03
+		// ADDITIONAL FEATURE
+		// Can choose which file to save schedule file to.
+		// Can be used to fix issue where a bad schedule file makes the program run out of memory.
+		
+		JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new java.io.File("."));
+		fc.setDialogTitle("Set Schedule Data File");
+		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		fc.setAcceptAllFileFilterUsed(false);
+		
+		fc.showOpenDialog(cal);
+		
+		path = fc.getSelectedFile();
 		config = new Config();
 		
 		//Code to open the config file.
@@ -177,6 +193,7 @@ public class Main {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void recallConfigFile() throws ClassNotFoundException, IOException{
+		
 		if(path.exists()) {
 			FileInputStream recallConfig = new FileInputStream(path);
 			ObjectInputStream fileRecall = new ObjectInputStream(recallConfig);
