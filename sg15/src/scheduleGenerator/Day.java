@@ -3,6 +3,11 @@ package scheduleGenerator;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/*
+ * SWAP 1, TEAM: 03
+ * BAD CODE SMELL:
+ * This is an example of a Lazy class because it doesn't do very much.
+ */
 /**
  * Day is used to store jobs for a given day.
  *
