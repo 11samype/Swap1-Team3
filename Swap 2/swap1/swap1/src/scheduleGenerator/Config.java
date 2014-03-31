@@ -36,7 +36,10 @@ public class Config extends javax.swing.JFrame {
     private int numSelected = 0;
     @SuppressWarnings("rawtypes")
 	private DefaultListModel[] models;
-    
+    // SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Feature Envy - add CalendarGUI object for change
+    private CalendarGUI gui;
     
     /**
      * Used to edit days.
@@ -314,6 +317,11 @@ public class Config extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
     
+    // SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Feature Envy
+	// Moved to CalendarGUI, made some changes later in this file to account for it
+    
     /*
      * SWAP 1, TEAM2 (JORDON/FRANCIS)
      * 
@@ -327,51 +335,50 @@ public class Config extends javax.swing.JFrame {
      * The GUI for each tab really needs to be put into a single object.
      */
 //    private void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
-//   	/*
-//   	* SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
-//   	* instead of here
-//   	* Fix: move the function into the CalendarGUI.
-//   	*   
-//   	*/
-//   	GroupLayout layout = new GroupLayout(tab);
-//   	tab.setLayout(layout);
-//   	layout.setHorizontalGroup(
-//   			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//           .addGroup(layout.createSequentialGroup()
-//               .addContainerGap()
-//               .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-//               .addGap(18, 18, 18)
-//               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                   .addGroup(layout.createSequentialGroup()
-//                       .addComponent(l)
-//                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//                           .addGroup(layout.createSequentialGroup()
-//                               .addGap(14, 14, 14)
-//                               .addComponent(addJob))
-//                           .addGroup(layout.createSequentialGroup()
-//                               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-//                               .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-//                   .addComponent(deleteJob))
-//               .addContainerGap(431, Short.MAX_VALUE))
-//       );
-//   	layout.setVerticalGroup(
-//           layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//           .addGroup(layout.createSequentialGroup()
-//               .addContainerGap()
-//               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-//                   .addGroup(layout.createSequentialGroup()
-//                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-//                           .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                           .addComponent(l))
-//                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-//                       .addComponent(addJob)
-//                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//                       .addComponent(deleteJob))
-//                   .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-//               .addContainerGap(25, Short.MAX_VALUE))
-//       );
-//   }
-//
+//    	/*
+//    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
+//    	 * instead of here
+//    	 * Fix: move the function into the CalendarGUI.
+//    	 * 
+//    	 */
+//    	GroupLayout layout = new GroupLayout(tab);
+//    	tab.setLayout(layout);
+//    	layout.setHorizontalGroup(
+//    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap()
+//                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addGap(18, 18, 18)
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                    .addGroup(layout.createSequentialGroup()
+//                        .addComponent(l)
+//                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                            .addGroup(layout.createSequentialGroup()
+//                                .addGap(14, 14, 14)
+//                                .addComponent(addJob))
+//                            .addGroup(layout.createSequentialGroup()
+//                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+//                    .addComponent(deleteJob))
+//                .addContainerGap(431, Short.MAX_VALUE))
+//        );
+//    	layout.setVerticalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap()
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//                    .addGroup(layout.createSequentialGroup()
+//                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                            .addComponent(l))
+//                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                        .addComponent(addJob)
+//                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                        .addComponent(deleteJob))
+//                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                .addContainerGap(25, Short.MAX_VALUE))
+//        );
+//    }
 
     /*
      * SMELL: Duplicated Code: it has a check action performed method, which involve a lot duplicated code.
@@ -580,6 +587,21 @@ public class Config extends javax.swing.JFrame {
     private DayTab[] dayTabsList;
     
     
+    public CalendarGUI getGui() {
+		return gui;
+	}
+
+	public void setGui(CalendarGUI gui) {
+		this.gui = gui;
+	}
+
+
+	/*
+     * SWAP 1, TEAM2 (JORDON/FRANCIS)
+     * SMELL: Data Clumps - These bunches of data appear together practically
+     * 	every time any one of them is referenced.
+     * FIX: Make them into their own object.
+     */
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList sundayJobList;
 //    /private DayTab sundayTab;
