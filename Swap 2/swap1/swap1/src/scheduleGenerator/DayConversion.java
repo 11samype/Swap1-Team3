@@ -1,5 +1,11 @@
 package scheduleGenerator;
 
+// SWAP 2, TEAM 03
+// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+// 1. Created this class to have access to the static day manipulation methods
+// 2. more day manipulations such as date to sentence or something like that
+// 3. This was a successful refactoring because it gives access to the static methods
+//	  for date manipulation
 public class DayConversion {
 
 	public static int numForName(String nameOfDay) {

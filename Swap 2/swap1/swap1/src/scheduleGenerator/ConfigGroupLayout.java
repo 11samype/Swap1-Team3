@@ -7,7 +7,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.LayoutStyle;
-
+/**
+ * 
+ * @author sternetj
+ * 		// SWAP 2, TEAM 03
+		// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+		// 1. Created this class to remove some unecessary functionality out of the Config class
+		// 2. Different layouts could be implemented
+		// 3. pretty successful except the code was basically just dumped in this class
+		 * 	  and the code could probably be refactored itself.
+ *
+ */
 public class ConfigGroupLayout extends GroupLayout {
 
 	public ConfigGroupLayout(Container container, JPanel configPanel,

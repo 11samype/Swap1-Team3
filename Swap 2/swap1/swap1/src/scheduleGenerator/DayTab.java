@@ -11,6 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+// SWAP 2, TEAM 03
+// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+// 1. Created this class to remove the duplicate code of creation and use of 
+//	  the the different day tabs in the Config class
+// 2. Different functionalities could be added to these tabs as well as 
+//	  new buttons and components
+// 3. This was a very successful refactoring and helped cut down on a lot of 
+//	  duplicate code in the config class
 @SuppressWarnings("serial")
 public class DayTab extends JPanel {
 

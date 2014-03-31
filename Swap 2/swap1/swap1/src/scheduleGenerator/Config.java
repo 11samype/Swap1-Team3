@@ -39,6 +39,7 @@ public class Config extends JFrame {
 
 	private boolean firstSelection = true;
 	private int numSelected = 0;
+	private final int DAYS_IN_WEEK = 7;
 	@SuppressWarnings("rawtypes")
 	private DefaultListModel[] models;
 	// SWAP 2, TEAM 03
@@ -59,10 +60,20 @@ public class Config extends JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	public Config(ArrayList<Day> days) {
-		this.models = new DefaultListModel[7];
+		this.models = new DefaultListModel[DAYS_IN_WEEK];
 		initDyn();
 		initComponents();
 
+		// SWAP 2, TEAM 03
+		// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+		// 1. Created Classes for the dayTabs and for the dayCheckboxes, 
+		//	  Created static class for date conversion
+		// 2. This allows for more days that could be scheduled because 
+		//    the days are all contained in lists with a number associated to the name.
+		//	  This replaced the giant if statment and just made it into a single for loop.
+		// 3. This refactoring was successful because the functionality of each type
+		//    that was duplicated many times throughout the class were moved to their
+		//    own classes that contained the necessary functionality
 		for (Day day : days) {
 			int dayNum = DayConversion.numForName(day.getNameOfDay()) - 1;
 			if (dayNum > -1) {
@@ -83,7 +94,7 @@ public class Config extends JFrame {
 	 * Creates new form.
 	 */
 	public Config() {
-		this.models = new DefaultListModel[7];
+		this.models = new DefaultListModel[DAYS_IN_WEEK];
 		initDyn();
 
 		initComponents();
@@ -92,11 +103,19 @@ public class Config extends JFrame {
 	@SuppressWarnings("rawtypes")
 	private void initDyn() {
 
-		this.dayJobLists = new JList[7];
-		this.dayTabsList = new DayTab[7];
-		this.dayCheckboxes = new DayCheckBox[7];
+		// SWAP 2, TEAM 03
+		// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+		// 1. Created DayTab and DayCheckBox classes that contained the duplicate code that existed in
+		//	  this class. Then Created list to contain the elements instead of seperate fields.
+		// 2. This allows for more days/checkboxes/tabs to be created without changing much code except
+		//    for the number of items in the loop and the static day number to name method.
+		// 3. This replaced a lot of duplicated instantiations of similar objects and allowed the code
+		//	  to be placed in a for loop.
+		this.dayJobLists = new JList[DAYS_IN_WEEK];
+		this.dayTabsList = new DayTab[DAYS_IN_WEEK];
+		this.dayCheckboxes = new DayCheckBox[DAYS_IN_WEEK];
 
-		for (int dayIndex = 0; dayIndex < 7; dayIndex++) {
+		for (int dayIndex = 0; dayIndex < DAYS_IN_WEEK; dayIndex++) {
 			this.dayJobLists[dayIndex] = new JList();
 			this.dayTabsList[dayIndex] = new DayTab(new DefaultListModel());
 			this.dayCheckboxes[dayIndex] = new DayCheckBox(DayConversion.getNameforNum(dayIndex + 1));
@@ -112,11 +131,18 @@ public class Config extends JFrame {
 		 * of these out into different methods.
 		 */
 
+		// SWAP 2, TEAM 03
+		// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+		// 1. Created classes for the DayCheckBoxes and for the differen Config Layouts
+		// 2. you could add support for a variety of layouts that could then be switched between
+		//	  when this class is instantiated because you could pass in the layout that you want.
+		// 3. This refactoring was very successful because as the comment above says, it was a long
+		//	  method and now it is only 31 lines long.
 		this.configPanel = new JPanel();		
 		this.dayTabs = new JTabbedPane();
 		
 		
-		for (int dayIndex = 0; dayIndex < 7; dayIndex++) {
+		for (int dayIndex = 0; dayIndex < DAYS_IN_WEEK; dayIndex++) {
 			final int dayInt = dayIndex;
 			this.dayCheckboxes[dayIndex].addActionListener(new java.awt.event.ActionListener() {
 				@Override
@@ -146,6 +172,11 @@ public class Config extends JFrame {
 
 	}
 	
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+	// 1. I created a layout class specifically for the Config Class
+	// 2. You could create different layouts
+	// 3. Very because it moved part of the long method into a new method
 	private void InitializeLayout(){
 		ConfigGroupLayout jPanel1Layout = new ConfigGroupLayout(this.configPanel, this.dayCheckboxes, this.nextButton, this.daysHeaderLabel);		
 		this.configPanel.setLayout(jPanel1Layout);
@@ -186,6 +217,13 @@ public class Config extends JFrame {
 	// * Fix: move the function into the CalendarGUI.
 	// *
 	// */
+	
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+	// 1. Moved this code to the DayTab Class
+	// 2. Change how the tabs are laid out
+	// 3. Very, it removed alot of duplicate code from this method.
+	
 	// GroupLayout layout = new GroupLayout(tab);
 	// tab.setLayout(layout);
 	// layout.setHorizontalGroup(
@@ -240,6 +278,14 @@ public class Config extends JFrame {
 	 * implementation, the subclass can simply override this method.
 	 */
 
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+	// 1. Made all of the checkboxes use a generic method (this one) and got rid of the 
+	//	  duplicate method code. was able to make all the checkboxes use this same method.
+	// 2. Can change what happens on the checkbox change easily without having to change
+	//	  code in lots of places
+	// 3. The refcatoring was very successful because all of the functionality of the checkbox
+	//	  check is now in the same method.
 	/**
 	 * @param evt
 	 * @param dayName
@@ -275,8 +321,16 @@ public class Config extends JFrame {
 		 * even better served by encapsulating the day GUI elements into their
 		 * own class. It could also be improved by adding
 		 */
+		
+		// SWAP 2, TEAM 03
+		// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+		// 1. Created the DayCheckbox class and then created a list of them instead of
+		//	  having seven different fields.
+		// 2. you could add more days to the week realitively easily
+		// 3. This was successful because now you can added up all the jobs of the active
+		//	  tabs without checking to see which ones are active by name.
 		ArrayList<Day> days = new ArrayList<Day>();
-		for (int dayIndex = 0; dayIndex < 7; dayIndex++) {
+		for (int dayIndex = 0; dayIndex < DAYS_IN_WEEK; dayIndex++) {
 			if (this.dayCheckboxes[dayIndex].isSelected()) {
 				days.add(getJobs(this.dayCheckboxes[dayIndex].getText(), dayIndex));
 			}
@@ -376,7 +430,15 @@ public class Config extends JFrame {
 	 * appear together practically every time any one of them is referenced.
 	 * FIX: Make them into their own object.
 	 */
-
+	
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCEMENT FROM BAD SMELL
+	// 1. Move most of the fields into the DayTab class and the rest into lists of 
+	//	  the other new classes.
+	// 2. Nothing really could be added here
+	// 3. The refactoring was very successful because the large data clumps are now reduced
+	//	  Into three different lists.
+	
 	private DayTab[] dayTabsList;
 	@SuppressWarnings("rawtypes")
 	private JList[] dayJobLists;

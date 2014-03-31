@@ -70,7 +70,7 @@ public class Schedule extends Thread implements Serializable {
 	private void generateIndices() {
 		for (int i = 0; i < this.workers.size(); i++) {
 			for (Day day : this.workers.get(i).getDays()) {
-				int numDay = this.numForName(day.getNameOfDay());
+				int numDay = DayConversion.numForName(day.getNameOfDay());
 				this.workerIndices.get(numDay).add(this.workers.get(i));
 			}
 		}
@@ -100,7 +100,7 @@ public class Schedule extends Thread implements Serializable {
 		// While still in the current month generate a schedule for each day
 		while (currentMonth == this.cal.get(Calendar.MONTH)) {
 			for (Day day : this.days) {
-				if (this.cal.get(Calendar.DAY_OF_WEEK) == this.numForName(day
+				if (this.cal.get(Calendar.DAY_OF_WEEK) == DayConversion.numForName(day
 						.getNameOfDay())) {
 					TreeMap<String, Worker> jobsWithWorker = new TreeMap<String, Worker>();
 					ArrayList<String> workersWorking = new ArrayList<String>();
@@ -181,7 +181,7 @@ public class Schedule extends Thread implements Serializable {
 	public ArrayList<Worker> getWorkersForJob(Day day, ArrayList<String> workersWorking,String job){
 		ArrayList<Worker> workersForJob = new ArrayList<Worker>();
 
-		for (Worker worker : this.workerIndices.get(this
+		for (Worker worker : this.workerIndices.get(DayConversion
 				.numForName(day.getNameOfDay()))) {
 			Day workerDay = worker.getDayWithName(day
 					.getNameOfDay());
@@ -193,26 +193,6 @@ public class Schedule extends Thread implements Serializable {
 			}
 		}
 		return workersForJob;
-	}
-	
-	private int numForName(String nameOfDay) {
-		int dayNum = 0;
-		if (nameOfDay.equals("Sunday")) {
-			dayNum = 1;
-		} else if (nameOfDay.equals("Monday")) {
-			dayNum = 2;
-		} else if (nameOfDay.equals("Tuesday")) {
-			dayNum = 3;
-		} else if (nameOfDay.equals("Wednesday")) {
-			dayNum = 4;
-		} else if (nameOfDay.equals("Thursday")) {
-			dayNum = 5;
-		} else if (nameOfDay.equals("Friday")) {
-			dayNum = 6;
-		} else if (nameOfDay.equals("Saturday")) {
-			dayNum = 7;
-		}
-		return dayNum;
 	}
 
 	// /**
