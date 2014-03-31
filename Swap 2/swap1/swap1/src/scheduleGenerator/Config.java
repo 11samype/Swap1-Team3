@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -58,50 +59,50 @@ public class Config extends javax.swing.JFrame {
     			this.sundayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[0].addElement(job);
-    				this.sundayJobList.setModel(this.models[0]);
+    				this.dayTabsList[0].addJobElement(job);
+    				this.sundayJobList.setModel(this.dayTabsList[0].getModel());
     			}
     		} else if(day.getNameOfDay().equals("Monday")) {
     			this.mondayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[1].addElement(job);
-    				this.sundayJobList.setModel(this.models[1]);
+    				this.mondayTab.addJobElement(job);
+    				this.sundayJobList.setModel(this.mondayTab.getModel());
     			}
     		} else if(day.getNameOfDay().equals("Tuesday")) {
     			this.tuesdayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[2].addElement(job);
-    				this.sundayJobList.setModel(this.models[2]);
+    				this.tuesdayTab.addJobElement(job);
+    				this.sundayJobList.setModel(this.tuesdayTab.getModel());
     			}
     		} else if(day.getNameOfDay().equals("Wednesday")) {
     			this.wednesdayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[3].addElement(job);
-    				this.sundayJobList.setModel(this.models[3]);
+    				this.wednesdayTab.addJobElement(job);
+    				this.sundayJobList.setModel(this.wednesdayTab.getModel());
     			}
     		} else if(day.getNameOfDay().equals("Thursday")) {
     			this.thursdayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[4].addElement(job);
-    				this.sundayJobList.setModel(this.models[4]);
+    				this.thursdayTab.addJobElement(job);
+    				this.sundayJobList.setModel(this.thursdayTab.getModel());
     			}
     		} else if(day.getNameOfDay().equals("Friday")) {
     			this.fridayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[5].addElement(job);
-    				this.sundayJobList.setModel(this.models[5]);
+    				this.fridayTab.addJobElement(job);
+    				this.sundayJobList.setModel(this.fridayTab.getModel());
     			}
     		} else if(day.getNameOfDay().equals("Saturday")) {
     			this.saturdayCheck.doClick();
     			ArrayList<String> jobs = day.getJobs();
     			for(String job: jobs) {
-    				this.models[6].addElement(job);
-    				this.sundayJobList.setModel(this.models[6]);
+    				this.saturdayTab.addJobElement(job);
+    				this.sundayJobList.setModel(this.saturdayTab.getModel());
     			}
     		}
     	}
@@ -120,69 +121,31 @@ public class Config extends javax.swing.JFrame {
     
     @SuppressWarnings("rawtypes")
 	private void initDyn() {
-        this.sundayScrollPane = new javax.swing.JScrollPane();
-        this.sundayScrollPane.setPreferredSize(new Dimension(185,150));
         this.sundayJobList = new javax.swing.JList();
-        this.sundayJobName = new javax.swing.JTextField();
-        this.sundayLabel = new javax.swing.JLabel();
-        this.sundayAddJob = new javax.swing.JButton();
-        this.sundayDeleteJob = new javax.swing.JButton();
-        
-        this.mondayScrollPane = new javax.swing.JScrollPane();
-        this.mondayScrollPane.setPreferredSize(new Dimension(185,150));
         this.mondayJobList = new javax.swing.JList();
-        this.mondayJobName = new javax.swing.JTextField();
-        this.mondayLabel = new javax.swing.JLabel();
-        this.mondayAddJob = new javax.swing.JButton();
-        this.mondayDeleteJob = new javax.swing.JButton();
-        
-        this.tuesdayScrollPane = new javax.swing.JScrollPane();
-        this.tuesdayScrollPane.setPreferredSize(new Dimension(185,150));
         this.tuesdayJobList = new javax.swing.JList();
-        this.tuesdayJobName = new javax.swing.JTextField();
-        this.tuesdayLabel = new javax.swing.JLabel();
-        this.tuesdayAddJob = new javax.swing.JButton();
-        this.tuesdayDeleteJob = new javax.swing.JButton();
-        
-        this.wednesdayScrollPane = new javax.swing.JScrollPane();
-        this.wednesdayScrollPane.setPreferredSize(new Dimension(185,150));
         this.wednesdayJobList = new javax.swing.JList();
-        this.wednesdayJobName = new javax.swing.JTextField();
-        this.wednesdayLabel = new javax.swing.JLabel();
-        this.wednesdayAddJob = new javax.swing.JButton();
-        this.wednesdayDeleteJob = new javax.swing.JButton();
-        
-        this.thursdayScrollPane = new javax.swing.JScrollPane();
-        this.thursdayScrollPane.setPreferredSize(new Dimension(185,150));
         this.thursdayJobList = new javax.swing.JList();
-        this.thursdayJobName = new javax.swing.JTextField();
-        this.thursdayLabel = new javax.swing.JLabel();
-        this.thursdayAddJob = new javax.swing.JButton();
-        this.thursdayDeleteJob = new javax.swing.JButton();
-        
-        this.fridayScrollPane = new javax.swing.JScrollPane();
-        this.fridayScrollPane.setPreferredSize(new Dimension(185,150));
         this.fridayJobList = new javax.swing.JList();
-        this.fridayJobName = new javax.swing.JTextField();
-        this.fridayLabel = new javax.swing.JLabel();
-        this.fridayAddJob = new javax.swing.JButton();
-        this.fridayDeleteJob = new javax.swing.JButton();
-        
-        this.saturdayScrollPane = new javax.swing.JScrollPane();
-        this.saturdayScrollPane.setPreferredSize(new Dimension(185,150));
         this.saturdayJobList = new javax.swing.JList();
-        this.saturdayJobName = new javax.swing.JTextField();
-        this.saturdayLabel = new javax.swing.JLabel();
-        this.saturdayAddJob = new javax.swing.JButton();
-        this.saturdayDeleteJob = new javax.swing.JButton();
         
-        this.mondayTab = new javax.swing.JPanel();
-        this.tuesdayTab = new javax.swing.JPanel();
-        this.wednesdayTab = new javax.swing.JPanel();
-        this.thursdayTab = new javax.swing.JPanel();
-        this.fridayTab = new javax.swing.JPanel();
-        this.saturdayTab = new javax.swing.JPanel();
-        this.sundayTab = new javax.swing.JPanel();
+        this.mondayTab = new DayTab(new DefaultListModel());
+        this.tuesdayTab = new DayTab(new DefaultListModel());
+        this.wednesdayTab = new DayTab(new DefaultListModel());
+        this.thursdayTab = new DayTab(new DefaultListModel());
+        this.fridayTab = new DayTab(new DefaultListModel());
+        this.saturdayTab = new DayTab(new DefaultListModel());
+        //this.sundayTab = new DayTab(new DefaultListModel());
+        
+        this.dayTabsList = new DayTab[7];
+        this.dayTabsList[0] = new DayTab(new DefaultListModel());
+        this.dayTabsList[1] = new DayTab(new DefaultListModel());
+        this.dayTabsList[2] = new DayTab(new DefaultListModel());
+        this.dayTabsList[3] = new DayTab(new DefaultListModel());
+        this.dayTabsList[4] = new DayTab(new DefaultListModel());
+        this.dayTabsList[5] = new DayTab(new DefaultListModel());
+        this.dayTabsList[6] = new DayTab(new DefaultListModel());
+        
     }
 
     private void initComponents() {
@@ -215,7 +178,7 @@ public class Config extends javax.swing.JFrame {
         this.sundayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sundayCheckActionPerformed(evt);
+                dayCheckActionPerformed(evt, "Sunday", 0);
             }
         });
 
@@ -224,7 +187,7 @@ public class Config extends javax.swing.JFrame {
         this.wednesdayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wednesdayCheckActionPerformed(evt);
+            	dayCheckActionPerformed(evt, "Wednesday", 3);
             }
         });
 
@@ -233,7 +196,7 @@ public class Config extends javax.swing.JFrame {
         this.mondayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mondayCheckActionPerformed(evt);
+            	dayCheckActionPerformed(evt, "Monday", 1);
             }
         });
 
@@ -242,7 +205,7 @@ public class Config extends javax.swing.JFrame {
         this.tuesdayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tuesdayCheckActionPerformed(evt);
+            	dayCheckActionPerformed(evt, "Tuesday", 2);
             }
         });
 
@@ -254,7 +217,7 @@ public class Config extends javax.swing.JFrame {
         this.thursdayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                thursdayCheckActionPerformed(evt);
+            	dayCheckActionPerformed(evt, "Thursday", 4);
             }
         });
 
@@ -263,7 +226,7 @@ public class Config extends javax.swing.JFrame {
         this.fridayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fridayCheckActionPerformed(evt);
+            	dayCheckActionPerformed(evt, "Friday", 5);
             }
         });
 
@@ -272,7 +235,7 @@ public class Config extends javax.swing.JFrame {
         this.saturdayCheck.addActionListener(new java.awt.event.ActionListener() {
             @Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saturdayCheckActionPerformed(evt);
+            	dayCheckActionPerformed(evt, "Saturday", 6);
             }
         });
 
@@ -363,51 +326,52 @@ public class Config extends javax.swing.JFrame {
      * This does add a smell, or rather expand upon one that is already present: Long Parameter List.
      * The GUI for each tab really needs to be put into a single object.
      */
-    private void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
-    	/*
-    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
-    	 * instead of here
-    	 * Fix: move the function into the CalendarGUI.
-    	 * 
-    	 */
-    	GroupLayout layout = new GroupLayout(tab);
-    	tab.setLayout(layout);
-    	layout.setHorizontalGroup(
-    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(l)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(addJob))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(deleteJob))
-                .addContainerGap(431, Short.MAX_VALUE))
-        );
-    	layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(l))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addJob)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteJob))
-                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-    }
+//    private void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
+//   	/*
+//   	* SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
+//   	* instead of here
+//   	* Fix: move the function into the CalendarGUI.
+//   	*   
+//   	*/
+//   	GroupLayout layout = new GroupLayout(tab);
+//   	tab.setLayout(layout);
+//   	layout.setHorizontalGroup(
+//   			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//           .addGroup(layout.createSequentialGroup()
+//               .addContainerGap()
+//               .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+//               .addGap(18, 18, 18)
+//               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                   .addGroup(layout.createSequentialGroup()
+//                       .addComponent(l)
+//                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                           .addGroup(layout.createSequentialGroup()
+//                               .addGap(14, 14, 14)
+//                               .addComponent(addJob))
+//                           .addGroup(layout.createSequentialGroup()
+//                               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                               .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+//                   .addComponent(deleteJob))
+//               .addContainerGap(431, Short.MAX_VALUE))
+//       );
+//   	layout.setVerticalGroup(
+//           layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//           .addGroup(layout.createSequentialGroup()
+//               .addContainerGap()
+//               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//                   .addGroup(layout.createSequentialGroup()
+//                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                           .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                           .addComponent(l))
+//                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                       .addComponent(addJob)
+//                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                       .addComponent(deleteJob))
+//                   .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//               .addContainerGap(25, Short.MAX_VALUE))
+//       );
+//   }
+//
 
     /*
      * SMELL: Duplicated Code: it has a check action performed method, which involve a lot duplicated code.
@@ -419,363 +383,72 @@ public class Config extends javax.swing.JFrame {
 	 * @param evt  
 	 */
     @SuppressWarnings("unchecked")
-	private void sundayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        if(this.sundayCheck.isSelected()) {
+	private void dayCheckActionPerformed(java.awt.event.ActionEvent evt, String name, int modelNum) { 
+        if(((JCheckBox)evt.getSource()).isSelected()) {
             this.numSelected++;
             if(this.firstSelection) {
                 stretch();
             }
-            this.models[0] = new DefaultListModel<Object>();
-            this.sundayJobList.setModel(this.models[0]);
-            this.sundayScrollPane.setViewportView(this.sundayJobList);
-
-            this.sundayJobName.setColumns(20);
-
-            this.sundayLabel.setText("Job Name:");
-
-            this.sundayAddJob.setText("Add Job");
-            this.sundayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.sundayJobName.getText().isEmpty()) {
-                        Config.this.models[0].addElement(Config.this.sundayJobName.getText());
-                        Config.this.sundayJobList.setModel(Config.this.models[0]);
-                        Config.this.sundayJobName.setText("");
-                    }
-                }
-            });
-
-            this.sundayDeleteJob.setText("Delete Job");
-            this.sundayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.sundayJobList.isSelectionEmpty()) {
-                        int n = Config.this.sundayJobList.getSelectedIndex();
-                        Config.this.models[0].remove(n);
-                    }
-                    
-                }
-            });
-
-            setTabLayout(this.sundayTab, this.sundayScrollPane, this.sundayLabel, this.sundayAddJob, this.sundayDeleteJob, this.sundayJobName);
-            this.dayTabs.addTab("Sunday", this.sundayTab);
-        } else {
-            this.numSelected--;
-            stretch();
-            this.dayTabs.remove(this.sundayTab);
-        }
-        
-    }                                           
-
-    /**
-	 * @param evt  
-	 */
-    @SuppressWarnings("unchecked")
-	private void mondayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        if(this.mondayCheck.isSelected()) {
-            this.numSelected++;
-            if(this.firstSelection) {
-                stretch();
-            }
-            this.models[1] = new DefaultListModel<Object>();
-            this.mondayJobList.setModel(this.models[1]);
-            this.mondayScrollPane.setViewportView(this.mondayJobList);
-
-            this.mondayJobName.setColumns(20);
-
-            this.mondayLabel.setText("Job Name:");
-
-            this.mondayAddJob.setText("Add Job");
-            this.mondayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.mondayJobName.getText().isEmpty()) {
-                        Config.this.models[1].addElement(Config.this.mondayJobName.getText());
-                        Config.this.mondayJobList.setModel(Config.this.models[1]);
-                        Config.this.mondayJobName.setText("");
-                    }
-                }
-            });
-
-            this.mondayDeleteJob.setText("Delete Job");
-            this.mondayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.mondayJobList.isSelectionEmpty()) {
-                        int n = Config.this.mondayJobList.getSelectedIndex();
-                        Config.this.models[1].remove(n);
-                    }
-                    
-                }
-            });
-
-            setTabLayout(this.mondayTab, this.mondayScrollPane, this.mondayLabel, this.mondayAddJob, this.mondayDeleteJob, this.mondayJobName);
-            dayTabs.addTab("Monday", this.mondayTab);
-        } else {
-            this.numSelected--;
-            stretch();
-            this.dayTabs.remove(this.mondayTab);
-        }
-                
-    }                                           
-
-    /**
-	 * @param evt  
-	 */
-    @SuppressWarnings("unchecked")
-	private void tuesdayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        if(this.tuesdayCheck.isSelected()) {
-            this.numSelected++;
-            if(this.firstSelection) {
-                stretch();
-            }
-            this.models[2] = new DefaultListModel<Object>();
-            this.tuesdayJobList.setModel(this.models[2]);
-            this.tuesdayScrollPane.setViewportView(this.tuesdayJobList);
-
-            this.tuesdayJobName.setColumns(20);
-
-            this.tuesdayLabel.setText("Job Name:");
-
-            this.tuesdayAddJob.setText("Add Job");
-            this.tuesdayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.tuesdayJobName.getText().isEmpty()) {
-                        Config.this.models[2].addElement(Config.this.tuesdayJobName.getText());
-                        Config.this.tuesdayJobList.setModel(Config.this.models[2]);
-                        Config.this.tuesdayJobName.setText("");
-                    }
-                }
-            });
-
-            this.tuesdayDeleteJob.setText("Delete Job");
-            this.tuesdayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.tuesdayJobList.isSelectionEmpty()) {
-                        int n = Config.this.tuesdayJobList.getSelectedIndex();
-                        Config.this.models[2].remove(n);
-                    }
-                    
-                }
-            });
-
-            setTabLayout(this.tuesdayTab, this.tuesdayScrollPane, this.tuesdayLabel, this.tuesdayAddJob, this.tuesdayDeleteJob, this.tuesdayJobName);
-            this.dayTabs.addTab("Tuesday", this.tuesdayTab);
-        } else {
-            this.numSelected--;
-            stretch();
-            this.dayTabs.remove(this.tuesdayTab);
-        }
-    }                                            
-
-    /**
-	 * @param evt  
-	 */
-    @SuppressWarnings("unchecked")
-	private void wednesdayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        if(this.wednesdayCheck.isSelected()) {
-            this.numSelected++;
-            if(this.firstSelection) {
-                stretch();
-            }
-            this.models[3] = new DefaultListModel<Object>();
-            this.wednesdayJobList.setModel(this.models[3]);
-            this.wednesdayScrollPane.setViewportView(this.wednesdayJobList);
-
-            this.wednesdayJobName.setColumns(20);
-
-            this.wednesdayLabel.setText("Job Name:");
-
-            this.wednesdayAddJob.setText("Add Job");
-            this.wednesdayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.wednesdayJobName.getText().isEmpty()) {
-                        Config.this.models[3].addElement(Config.this.wednesdayJobName.getText());
-                        Config.this.wednesdayJobList.setModel(Config.this.models[3]);
-                        Config.this.wednesdayJobName.setText("");
-                    }
-                }
-            });
-
-            this.wednesdayDeleteJob.setText("Delete Job");
-            this.wednesdayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.wednesdayJobList.isSelectionEmpty()) {
-                        int n = Config.this.wednesdayJobList.getSelectedIndex();
-                        Config.this.models[3].remove(n);
-                    }
-                    
-                }
-            });
-
-            setTabLayout(this.wednesdayTab, this.wednesdayScrollPane, this.wednesdayLabel, this.wednesdayAddJob, this.wednesdayDeleteJob, this.wednesdayJobName);
-            this.dayTabs.addTab("Wednesday", this.wednesdayTab);
-        } else {
-            this.numSelected--;
-            stretch();
-            this.dayTabs.remove(this.wednesdayTab);
-        }
-        
-    }                                              
-
-    /**
-	 * @param evt  
-	 */
-    @SuppressWarnings("unchecked")
-	private void thursdayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        if(this.thursdayCheck.isSelected()) {
-            this.numSelected++;
-            if(this.firstSelection) {
-                stretch();
-            }
-            this.models[4] = new DefaultListModel<Object>();
-            this.thursdayJobList.setModel(this.models[4]);
-            this.thursdayScrollPane.setViewportView(this.thursdayJobList);
-
-            this.thursdayJobName.setColumns(20);
-
-            this.thursdayLabel.setText("Job Name:");
-
-            this.thursdayAddJob.setText("Add Job");
-            this.thursdayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.thursdayJobName.getText().isEmpty()) {
-                        Config.this.models[4].addElement(Config.this.thursdayJobName.getText());
-                        Config.this.thursdayJobList.setModel(Config.this.models[4]);
-                        Config.this.thursdayJobName.setText("");
-                    }
-                }
-            });
-
-            this.thursdayDeleteJob.setText("Delete Job");
-            this.thursdayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.thursdayJobList.isSelectionEmpty()) {
-                        int n = Config.this.thursdayJobList.getSelectedIndex();
-                        Config.this.models[4].remove(n);
-                    }
-                    
-                }
-            });
-            setTabLayout(this.thursdayTab, this.thursdayScrollPane, this.thursdayLabel, this.thursdayAddJob, this.thursdayDeleteJob, this.thursdayJobName);
             
-            this.dayTabs.addTab("Thursday", this.thursdayTab);
+    		if(name.equals("Sunday")) {
+                this.models[modelNum] = new DefaultListModel<Object>();
+                this.sundayJobList.setModel(this.models[modelNum]);
+                this.dayTabsList[0] = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.dayTabsList[0]);
+               // this.sundayTab = new DayTab(this.models[modelNum]);
+                //this.dayTabs.addTab(name, this.sundayTab);
+    		} else if(name.equals("Monday")) {
+                this.models[modelNum] = new DefaultListModel<Object>();
+                this.mondayJobList.setModel(this.models[modelNum]);
+                this.mondayTab = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.mondayTab);
+    		} else if(name.equals("Tuesday")) {
+                this.models[modelNum] = new DefaultListModel<Object>();
+                this.tuesdayJobList.setModel(this.models[modelNum]);
+                this.tuesdayTab = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.tuesdayTab);
+    		} else if(name.equals("Wednesday")) {
+                this.models[modelNum] = new DefaultListModel<Object>();
+                this.wednesdayJobList.setModel(this.models[modelNum]);
+                this.wednesdayTab = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.wednesdayTab);
+    		} else if(name.equals("Thursday")) {
+                this.models[modelNum] = new DefaultListModel<Object>();
+                this.thursdayJobList.setModel(this.models[modelNum]);
+                this.thursdayTab = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.thursdayTab);
+    		} else if(name.equals("Friday")) {
+    			this.models[modelNum] = new DefaultListModel<Object>();
+                this.fridayJobList.setModel(this.models[modelNum]);
+                this.fridayTab = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.fridayTab);
+    		} else if(name.equals("Saturday")) {
+    			this.models[modelNum] = new DefaultListModel<Object>();
+                this.saturdayJobList.setModel(this.models[modelNum]);
+                this.saturdayTab = new DayTab(this.models[modelNum]);
+                this.dayTabs.addTab(name, this.saturdayTab);
+    		}
         } else {
             this.numSelected--;
             stretch();
-            this.dayTabs.remove(this.thursdayTab);
-        }
-        
-    }
-
-    /**
-	 * @param evt  
-	 */
-    @SuppressWarnings("unchecked")
-	private void fridayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                            
-       if(this.fridayCheck.isSelected()) {
-            this.numSelected++;
-            if(this.firstSelection) {
-                stretch();
-            }
-            this.models[5] = new DefaultListModel<Object>();
-            this.fridayJobList.setModel(this.models[5]);
-            this.fridayScrollPane.setViewportView(this.fridayJobList);
-
-            this.fridayJobName.setColumns(20);
-
-            this.fridayLabel.setText("Job Name:");
-
-            this.fridayAddJob.setText("Add Job");
-            this.fridayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.fridayJobName.getText().isEmpty()) {
-                        Config.this.models[5].addElement(Config.this.fridayJobName.getText());
-                        Config.this.fridayJobList.setModel(Config.this.models[5]);
-                        Config.this.fridayJobName.setText("");
-                    }
-                }
-            });
-
-            this.fridayDeleteJob.setText("Delete Job");
-            this.fridayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.fridayJobList.isSelectionEmpty()) {
-                        int n = Config.this.fridayJobList.getSelectedIndex();
-                        Config.this.models[5].remove(n);
-                    }
-                    
-                }
-            });
-
-            setTabLayout(this.fridayTab, this.fridayScrollPane, this.fridayLabel, this.fridayAddJob, this.fridayDeleteJob, this.fridayJobName);
-            this.dayTabs.addTab("Friday", this.fridayTab);
-        } else {
-            this.numSelected--;
-            stretch();
-            this.dayTabs.remove(this.fridayTab);
+    		if(name.equals("Sunday")) {
+    			this.dayTabs.remove(this.dayTabsList[0]);
+    		} else if(name.equals("Monday")) {
+    			this.dayTabs.remove(this.mondayTab);
+    		} else if(name.equals("Tuesday")) {
+    			this.dayTabs.remove(this.tuesdayTab);
+    		} else if(name.equals("Wednesday")) {
+    			this.dayTabs.remove(this.wednesdayTab);
+    		} else if(name.equals("Thursday")) {
+    			this.dayTabs.remove(this.thursdayTab);
+    		} else if(name.equals("Friday")) {
+    			this.dayTabs.remove(this.fridayTab);
+    		} else if(name.equals("Saturday")) {
+    			this.dayTabs.remove(this.saturdayTab);
+    		}
         }
         
     }                                           
-
-    /**
-	 * @param evt  
-	 */
-    @SuppressWarnings("unchecked")
-	private void saturdayCheckActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        if(this.saturdayCheck.isSelected()) {
-            this.numSelected++;
-            if(this.firstSelection) {
-                stretch();
-            }
-            this.models[6] = new DefaultListModel<Object>();
-            this.saturdayJobList.setModel(this.models[6]);
-            this.saturdayScrollPane.setViewportView(this.saturdayJobList);
-
-            this.saturdayJobName.setColumns(20);
-
-            this.saturdayLabel.setText("Job Name:");
-
-            this.saturdayAddJob.setText("Add Job");
-            this.saturdayAddJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    if(!Config.this.saturdayJobName.getText().isEmpty()) {
-                        Config.this.models[6].addElement(Config.this.saturdayJobName.getText());
-                        Config.this.saturdayJobList.setModel(Config.this.models[6]);
-                        Config.this.saturdayJobName.setText("");
-                    }
-                }
-            });
-
-            this.saturdayDeleteJob.setText("Delete Job");
-            this.saturdayDeleteJob.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    while(!Config.this.saturdayJobList.isSelectionEmpty()) {
-                        int n = Config.this.saturdayJobList.getSelectedIndex();
-                        Config.this.models[6].remove(n);
-                    }
-                    
-                }
-            });
-
-            setTabLayout(this.saturdayTab, this.saturdayScrollPane, this.saturdayLabel, this.saturdayAddJob, this.saturdayDeleteJob, this.saturdayJobName);
-            this.dayTabs.addTab("Saturday", this.saturdayTab);
-        } else {
-            this.numSelected--;
-            stretch();
-            this.dayTabs.remove(this.saturdayTab);
-        }
-    }
 
     /**
 	 * @param evt  
@@ -841,7 +514,22 @@ public class Config extends javax.swing.JFrame {
     
     private Day getJobs(String name, int num) {
     	ArrayList<Object> day = new ArrayList<Object>();
-    	List<Object> jobs = Arrays.asList(this.models[num].toArray());
+    	List<Object> jobs = null;
+		if(num == 0) {
+			jobs = Arrays.asList(this.dayTabsList[num].getModel().toArray());
+		} else if(num == 1) {
+			jobs = Arrays.asList(this.mondayTab.getModel().toArray());
+		} else if(num == 2) {
+			jobs = Arrays.asList(this.tuesdayTab.getModel().toArray());
+		} else if(num == 3) {
+			jobs = Arrays.asList(this.wednesdayTab.getModel().toArray());
+		} else if(num == 4) {
+			jobs = Arrays.asList(this.thursdayTab.getModel().toArray());
+		} else if(num == 5) {
+			jobs = Arrays.asList(this.fridayTab.getModel().toArray());
+		} else if(num == 6) {
+			jobs = Arrays.asList(this.saturdayTab.getModel().toArray());
+		}
     	day.addAll(jobs);
     	return new Day(name, day);    	
     }
@@ -889,75 +577,36 @@ public class Config extends javax.swing.JFrame {
         });
     }
     
+    private DayTab[] dayTabsList;
     
-    /*
-     * SWAP 1, TEAM2 (JORDON/FRANCIS)
-     * SMELL: Data Clumps - These bunches of data appear together practically
-     * 	every time any one of them is referenced.
-     * FIX: Make them into their own object.
-     */
-    private javax.swing.JScrollPane sundayScrollPane;
-    private javax.swing.JButton sundayAddJob;
-    private javax.swing.JButton sundayDeleteJob;
+    
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList sundayJobList;
-    private javax.swing.JTextField sundayJobName;
-    private javax.swing.JLabel sundayLabel;
-    private javax.swing.JPanel sundayTab;
+//    /private DayTab sundayTab;
     
-    private javax.swing.JScrollPane mondayScrollPane;
-    private javax.swing.JButton mondayAddJob;
-    private javax.swing.JButton mondayDeleteJob;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList mondayJobList;
-    private javax.swing.JTextField mondayJobName;
-    private javax.swing.JLabel mondayLabel;
-    private javax.swing.JPanel mondayTab;
+    private DayTab mondayTab;
     
-    private javax.swing.JScrollPane tuesdayScrollPane;
-    private javax.swing.JButton tuesdayAddJob;
-    private javax.swing.JButton tuesdayDeleteJob;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList tuesdayJobList;
-    private javax.swing.JTextField tuesdayJobName;
-    private javax.swing.JLabel tuesdayLabel;
-    private javax.swing.JPanel tuesdayTab;
+    private DayTab tuesdayTab;
     
-    private javax.swing.JScrollPane wednesdayScrollPane;
-    private javax.swing.JButton wednesdayAddJob;
-    private javax.swing.JButton wednesdayDeleteJob;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList wednesdayJobList;
-    private javax.swing.JTextField wednesdayJobName;
-    private javax.swing.JLabel wednesdayLabel;
-    private javax.swing.JPanel wednesdayTab;
+    private DayTab wednesdayTab;
     
-    private javax.swing.JScrollPane thursdayScrollPane;
-    private javax.swing.JButton thursdayAddJob;
-    private javax.swing.JButton thursdayDeleteJob;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList thursdayJobList;
-    private javax.swing.JTextField thursdayJobName;
-    private javax.swing.JLabel thursdayLabel;
-    private javax.swing.JPanel thursdayTab;
+    private DayTab thursdayTab;
     
-    private javax.swing.JScrollPane fridayScrollPane;
-    private javax.swing.JButton fridayAddJob;
-    private javax.swing.JButton fridayDeleteJob;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList fridayJobList;
-    private javax.swing.JTextField fridayJobName;
-    private javax.swing.JLabel fridayLabel;
-    private javax.swing.JPanel fridayTab;
+    private DayTab fridayTab;
     
-    private javax.swing.JScrollPane saturdayScrollPane;
-    private javax.swing.JButton saturdayAddJob;
-    private javax.swing.JButton saturdayDeleteJob;
     @SuppressWarnings("rawtypes")
 	private javax.swing.JList saturdayJobList;
-    private javax.swing.JTextField saturdayJobName;
-    private javax.swing.JLabel saturdayLabel;
-    private javax.swing.JPanel saturdayTab;
+    private DayTab saturdayTab;
     
     private javax.swing.JTabbedPane dayTabs;
     private javax.swing.JCheckBox fridayCheck;
