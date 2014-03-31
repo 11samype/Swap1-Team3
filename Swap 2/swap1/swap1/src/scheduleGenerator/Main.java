@@ -63,6 +63,12 @@ public class Main {
 				//config.setVisible(true);
 				cal.setVisible(true);
 			} else{
+				// SWAP 2, TEAM 03
+				// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+				// Feature Envy
+				// See Config.java
+				
+				config.setGui(new CalendarGUI(getSchedule()));
 				config.setVisible(true);
 			}
 		} catch (Exception exception) {

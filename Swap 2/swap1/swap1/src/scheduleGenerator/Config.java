@@ -35,7 +35,10 @@ public class Config extends javax.swing.JFrame {
     private int numSelected = 0;
     @SuppressWarnings("rawtypes")
 	private DefaultListModel[] models;
-    
+    // SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Feature Envy - add CalendarGUI object for change
+    private CalendarGUI gui;
     
     /**
      * Used to edit days.
@@ -351,6 +354,11 @@ public class Config extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
     
+    // SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Feature Envy
+	// Moved to CalendarGUI, made some changes later in this file to account for it
+    
     /*
      * SWAP 1, TEAM2 (JORDON/FRANCIS)
      * 
@@ -363,51 +371,51 @@ public class Config extends javax.swing.JFrame {
      * This does add a smell, or rather expand upon one that is already present: Long Parameter List.
      * The GUI for each tab really needs to be put into a single object.
      */
-    private void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
-    	/*
-    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
-    	 * instead of here
-    	 * Fix: move the function into the CalendarGUI.
-    	 * 
-    	 */
-    	GroupLayout layout = new GroupLayout(tab);
-    	tab.setLayout(layout);
-    	layout.setHorizontalGroup(
-    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(l)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(addJob))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(deleteJob))
-                .addContainerGap(431, Short.MAX_VALUE))
-        );
-    	layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(l))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addJob)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteJob))
-                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-    }
+//    private void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
+//    	/*
+//    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
+//    	 * instead of here
+//    	 * Fix: move the function into the CalendarGUI.
+//    	 * 
+//    	 */
+//    	GroupLayout layout = new GroupLayout(tab);
+//    	tab.setLayout(layout);
+//    	layout.setHorizontalGroup(
+//    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap()
+//                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                .addGap(18, 18, 18)
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                    .addGroup(layout.createSequentialGroup()
+//                        .addComponent(l)
+//                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//                            .addGroup(layout.createSequentialGroup()
+//                                .addGap(14, 14, 14)
+//                                .addComponent(addJob))
+//                            .addGroup(layout.createSequentialGroup()
+//                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+//                    .addComponent(deleteJob))
+//                .addContainerGap(431, Short.MAX_VALUE))
+//        );
+//    	layout.setVerticalGroup(
+//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGroup(layout.createSequentialGroup()
+//                .addContainerGap()
+//                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//                    .addGroup(layout.createSequentialGroup()
+//                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//                            .addComponent(l))
+//                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//                        .addComponent(addJob)
+//                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//                        .addComponent(deleteJob))
+//                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                .addContainerGap(25, Short.MAX_VALUE))
+//        );
+//    }
 
     /*
      * SMELL: Duplicated Code: it has a check action performed method, which involve a lot duplicated code.
@@ -457,7 +465,10 @@ public class Config extends javax.swing.JFrame {
                 }
             });
 
-            setTabLayout(this.sundayTab, this.sundayScrollPane, this.sundayLabel, this.sundayAddJob, this.sundayDeleteJob, this.sundayJobName);
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.sundayTab, this.sundayScrollPane, this.sundayLabel, this.sundayAddJob, this.sundayDeleteJob, this.sundayJobName);
             this.dayTabs.addTab("Sunday", this.sundayTab);
         } else {
             this.numSelected--;
@@ -508,8 +519,11 @@ public class Config extends javax.swing.JFrame {
                     
                 }
             });
-
-            setTabLayout(this.mondayTab, this.mondayScrollPane, this.mondayLabel, this.mondayAddJob, this.mondayDeleteJob, this.mondayJobName);
+            
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.mondayTab, this.mondayScrollPane, this.mondayLabel, this.mondayAddJob, this.mondayDeleteJob, this.mondayJobName);
             dayTabs.addTab("Monday", this.mondayTab);
         } else {
             this.numSelected--;
@@ -561,7 +575,10 @@ public class Config extends javax.swing.JFrame {
                 }
             });
 
-            setTabLayout(this.tuesdayTab, this.tuesdayScrollPane, this.tuesdayLabel, this.tuesdayAddJob, this.tuesdayDeleteJob, this.tuesdayJobName);
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.tuesdayTab, this.tuesdayScrollPane, this.tuesdayLabel, this.tuesdayAddJob, this.tuesdayDeleteJob, this.tuesdayJobName);
             this.dayTabs.addTab("Tuesday", this.tuesdayTab);
         } else {
             this.numSelected--;
@@ -612,7 +629,10 @@ public class Config extends javax.swing.JFrame {
                 }
             });
 
-            setTabLayout(this.wednesdayTab, this.wednesdayScrollPane, this.wednesdayLabel, this.wednesdayAddJob, this.wednesdayDeleteJob, this.wednesdayJobName);
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.wednesdayTab, this.wednesdayScrollPane, this.wednesdayLabel, this.wednesdayAddJob, this.wednesdayDeleteJob, this.wednesdayJobName);
             this.dayTabs.addTab("Wednesday", this.wednesdayTab);
         } else {
             this.numSelected--;
@@ -663,7 +683,11 @@ public class Config extends javax.swing.JFrame {
                     
                 }
             });
-            setTabLayout(this.thursdayTab, this.thursdayScrollPane, this.thursdayLabel, this.thursdayAddJob, this.thursdayDeleteJob, this.thursdayJobName);
+            
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.thursdayTab, this.thursdayScrollPane, this.thursdayLabel, this.thursdayAddJob, this.thursdayDeleteJob, this.thursdayJobName);
             
             this.dayTabs.addTab("Thursday", this.thursdayTab);
         } else {
@@ -716,7 +740,10 @@ public class Config extends javax.swing.JFrame {
                 }
             });
 
-            setTabLayout(this.fridayTab, this.fridayScrollPane, this.fridayLabel, this.fridayAddJob, this.fridayDeleteJob, this.fridayJobName);
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.fridayTab, this.fridayScrollPane, this.fridayLabel, this.fridayAddJob, this.fridayDeleteJob, this.fridayJobName);
             this.dayTabs.addTab("Friday", this.fridayTab);
         } else {
             this.numSelected--;
@@ -768,7 +795,10 @@ public class Config extends javax.swing.JFrame {
                 }
             });
 
-            setTabLayout(this.saturdayTab, this.saturdayScrollPane, this.saturdayLabel, this.saturdayAddJob, this.saturdayDeleteJob, this.saturdayJobName);
+            // SWAP 2, TEAM 03
+        	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+        	// Feature Envy - account for move to CalendarGUI
+            this.gui.setTabLayout(this.saturdayTab, this.saturdayScrollPane, this.saturdayLabel, this.saturdayAddJob, this.saturdayDeleteJob, this.saturdayJobName);
             this.dayTabs.addTab("Saturday", this.saturdayTab);
         } else {
             this.numSelected--;
@@ -890,7 +920,16 @@ public class Config extends javax.swing.JFrame {
     }
     
     
-    /*
+    public CalendarGUI getGui() {
+		return gui;
+	}
+
+	public void setGui(CalendarGUI gui) {
+		this.gui = gui;
+	}
+
+
+	/*
      * SWAP 1, TEAM2 (JORDON/FRANCIS)
      * SMELL: Data Clumps - These bunches of data appear together practically
      * 	every time any one of them is referenced.

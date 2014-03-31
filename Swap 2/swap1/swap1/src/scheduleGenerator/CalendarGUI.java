@@ -8,7 +8,13 @@ import java.util.GregorianCalendar;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,21 +61,10 @@ public class CalendarGUI extends javax.swing.JFrame {
 		this.monthName = (new SimpleDateFormat("MMM yyyy")).format(date);
 		this.monthTitle.setText(this.monthName);
 	}
-
-	/**
-	 * Displays the calendar for the current month based on the computers month.
-	 * 
-	 */
-	public void fillTableForThisMonth() {
-		Calendar cal = Calendar.getInstance();
-		int currentYear = cal.get(Calendar.YEAR);
-		this.currentMonth = cal.get(Calendar.MONTH) + 1;
-		this.setTitleMonth(cal.getTime());
-		this.monthsAhead = 0;
-		this.yearsAhead = 0;
-
-		String keyStart = currentYear + "/"
-				+ String.format("%02d", this.currentMonth);
+	
+	public void fillTableForMonth(int month) {
+		
+		String keyStart = new SimpleDateFormat("yyyy/MM").format(cal.getTime());
 		String currentKey = "";
 
 		// Generates calendar for current month if none exists
@@ -91,9 +86,9 @@ public class CalendarGUI extends javax.swing.JFrame {
 		DefaultTableModel table = new DefaultTableModel(new Object[0][0],
 				new String[0][0]);
 
-		this.cal = new GregorianCalendar(currentYear, this.currentMonth - 1, 1);
+		this.cal = (GregorianCalendar) cal;
 
-		while (this.currentMonth == this.cal.get(Calendar.MONTH) + 1) {
+		while (month == this.cal.get(Calendar.MONTH) + 1) {
 			String tempKey = this.cal.get(Calendar.YEAR)
 					+ "/"
 					+ String.format("%02d", (this.cal.get(Calendar.MONTH) + 1))
@@ -128,6 +123,78 @@ public class CalendarGUI extends javax.swing.JFrame {
 	}
 
 	/**
+	 * Displays the calendar for the current month based on the computers month.
+	 * 
+	 */
+	public void fillTableForThisMonth() {
+		Calendar cal = Calendar.getInstance();
+		this.currentMonth = cal.get(Calendar.MONTH) + 1;
+		this.setTitleMonth(cal.getTime());
+		this.monthsAhead = 0;
+		this.yearsAhead = 0;
+		
+		fillTableForMonth(this.currentMonth);
+
+//		String keyStart = currentYear + "/"
+//				+ String.format("%02d", this.currentMonth);
+//		String currentKey = "";
+//
+//		// Generates calendar for current month if none exists
+//		while (currentKey.equals("")) {
+//			Set<String> keys = this.scheduleMap.keySet();
+//			for (String key : keys) {
+//				if (key.startsWith(keyStart)) {
+//					currentKey = key;
+//					break;
+//				}
+//			}
+//			if (currentKey.equals("")) {
+//				Thread t = new Thread(this.schedule);
+//				t.start();
+//				//this.schedule.calculateNextMonth();
+//			}
+//		}
+//
+//		DefaultTableModel table = new DefaultTableModel(new Object[0][0],
+//				new String[0][0]);
+//
+//		this.cal = new GregorianCalendar(currentYear, this.currentMonth - 1, 1);
+//
+//		while (this.currentMonth == this.cal.get(Calendar.MONTH) + 1) {
+//			String tempKey = this.cal.get(Calendar.YEAR)
+//					+ "/"
+//					+ String.format("%02d", (this.cal.get(Calendar.MONTH) + 1))
+//					+ "/"
+//					+ String.format("%02d", this.cal.get(Calendar.DAY_OF_MONTH));
+//			if (this.scheduleMap.containsKey(tempKey)) {
+//
+//				int numOfJobs = this.scheduleMap.get(tempKey).size();
+//				String[] colData = new String[numOfJobs];
+//				int i = 0;
+//
+//				for (String key : this.scheduleMap.get(tempKey).keySet()) {
+//					colData[i] = key + ": "
+//							+ this.scheduleMap.get(tempKey).get(key).getName();
+//					i++;
+//				}
+//
+//				String numDate = (this.cal.get(Calendar.MONTH) + 1)
+//						+ "/"
+//						+ String.format("%02d",
+//								this.cal.get(Calendar.DAY_OF_MONTH)) + "/"
+//						+ String.format("%02d", this.cal.get(Calendar.YEAR));
+//				String colTitle = this.getNameforNum(this.cal
+//						.get(Calendar.DAY_OF_WEEK)) + " (" + numDate + ")";
+//				table.addColumn(colTitle, colData);
+//
+//			}
+//			this.cal.add(Calendar.DATE, 1);
+//		}
+//
+//		this.scheduleTable.setModel(table);
+	}
+
+	/**
 	 * Displays the next month from current month.
 	 * 
 	 */
@@ -142,64 +209,66 @@ public class CalendarGUI extends javax.swing.JFrame {
 			this.yearsAhead++;
 		}
 		this.setTitleMonth(cal.getTime());
+		
+		fillTableForMonth(showMonth);
 
-		String keyStart = new SimpleDateFormat("yyyy/MM").format(cal.getTime());
-		String currentKey = "";
-
-		// Generates calendar for current month if none exists
-		while (currentKey.equals("")) {
-			Set<String> keys = this.scheduleMap.keySet();
-			for (String key : keys) {
-				if (key.startsWith(keyStart)) {
-					currentKey = key;
-					break;
-				}
-			}
-			if (currentKey.equals("")) {
-				Thread t = new Thread(this.schedule);
-				t.start();
-				//this.schedule.calculateNextMonth();
-			}
-		}
-
-		DefaultTableModel table = new DefaultTableModel(new Object[0][0],
-				new String[0][0]);
-		this.cal = (GregorianCalendar) cal;
-
-		while (showMonth == this.cal.get(Calendar.MONTH) + 1) {
-			String tempKey = this.cal.get(Calendar.YEAR)
-					+ "/"
-					+ String.format("%02d", (this.cal.get(Calendar.MONTH) + 1))
-					+ "/"
-					+ String.format("%02d", this.cal.get(Calendar.DAY_OF_MONTH));
-			if (this.scheduleMap.containsKey(tempKey)) {
-
-				int numOfJobs = this.scheduleMap.get(tempKey).size();
-				String[] colData = new String[numOfJobs];
-				int i = 0;
-
-				for (String key : this.scheduleMap.get(tempKey).keySet()) {
-					colData[i] = key + ": "
-							+ this.scheduleMap.get(tempKey).get(key).getName();
-					i++;
-				}
-
-				String numDate = String.format("%02d",
-						(this.cal.get(Calendar.MONTH) + 1))
-						+ "/"
-						+ String.format("%02d",
-								this.cal.get(Calendar.DAY_OF_MONTH))
-						+ "/"
-						+ this.cal.get(Calendar.YEAR);
-				String colTitle = this.getNameforNum(this.cal
-						.get(Calendar.DAY_OF_WEEK)) + " (" + numDate + ")";
-				table.addColumn(colTitle, colData);
-
-			}
-			this.cal.add(Calendar.DATE, 1);
-
-		}
-		this.scheduleTable.setModel(table);
+//		String keyStart = new SimpleDateFormat("yyyy/MM").format(cal.getTime());
+//		String currentKey = "";
+//
+//		// Generates calendar for current month if none exists
+//		while (currentKey.equals("")) {
+//			Set<String> keys = this.scheduleMap.keySet();
+//			for (String key : keys) {
+//				if (key.startsWith(keyStart)) {
+//					currentKey = key;
+//					break;
+//				}
+//			}
+//			if (currentKey.equals("")) {
+//				Thread t = new Thread(this.schedule);
+//				t.start();
+//				//this.schedule.calculateNextMonth();
+//			}
+//		}
+//
+//		DefaultTableModel table = new DefaultTableModel(new Object[0][0],
+//				new String[0][0]);
+//		this.cal = (GregorianCalendar) cal;
+//
+//		while (showMonth == this.cal.get(Calendar.MONTH) + 1) {
+//			String tempKey = this.cal.get(Calendar.YEAR)
+//					+ "/"
+//					+ String.format("%02d", (this.cal.get(Calendar.MONTH) + 1))
+//					+ "/"
+//					+ String.format("%02d", this.cal.get(Calendar.DAY_OF_MONTH));
+//			if (this.scheduleMap.containsKey(tempKey)) {
+//
+//				int numOfJobs = this.scheduleMap.get(tempKey).size();
+//				String[] colData = new String[numOfJobs];
+//				int i = 0;
+//
+//				for (String key : this.scheduleMap.get(tempKey).keySet()) {
+//					colData[i] = key + ": "
+//							+ this.scheduleMap.get(tempKey).get(key).getName();
+//					i++;
+//				}
+//
+//				String numDate = String.format("%02d",
+//						(this.cal.get(Calendar.MONTH) + 1))
+//						+ "/"
+//						+ String.format("%02d",
+//								this.cal.get(Calendar.DAY_OF_MONTH))
+//						+ "/"
+//						+ this.cal.get(Calendar.YEAR);
+//				String colTitle = this.getNameforNum(this.cal
+//						.get(Calendar.DAY_OF_WEEK)) + " (" + numDate + ")";
+//				table.addColumn(colTitle, colData);
+//
+//			}
+//			this.cal.add(Calendar.DATE, 1);
+//
+//		}
+//		this.scheduleTable.setModel(table);
 	}
 
 	/**
@@ -240,6 +309,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 		} else {
 			this.setTitleMonth(new GregorianCalendar(currentYear,showMonth,0).getTime());
 
+//			fillTableForMonth(showMonth);
+			
 			String keyStart = currentYear + "/"
 					+ String.format("%02d", showMonth);
 			String currentKey = "";
@@ -628,6 +699,56 @@ public class CalendarGUI extends javax.swing.JFrame {
 			this.scheduleTable.setValueAt(job + ": " + input.getName(),i,j);
 		}
 	}
+	
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Feature Envy - moved here from Config
+	
+	 public void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
+	    	/*
+	    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
+	    	 * instead of here
+	    	 * Fix: move the function into the CalendarGUI.
+	    	 * 
+	    	 */
+	    	GroupLayout layout = new GroupLayout(tab);
+	    	tab.setLayout(layout);
+	    	layout.setHorizontalGroup(
+	    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                .addGap(18, 18, 18)
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addComponent(l)
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addGap(14, 14, 14)
+	                                .addComponent(addJob))
+	                            .addGroup(layout.createSequentialGroup()
+	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+	                    .addComponent(deleteJob))
+	                .addContainerGap(431, Short.MAX_VALUE))
+	        );
+	    	layout.setVerticalGroup(
+	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(layout.createSequentialGroup()
+	                .addContainerGap()
+	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	                    .addGroup(layout.createSequentialGroup()
+	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                            .addComponent(l))
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(addJob)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	                        .addComponent(deleteJob))
+	                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addContainerGap(25, Short.MAX_VALUE))
+	        );
+	    }
 
 	private javax.swing.JMenuItem editDays;
 	private javax.swing.JMenu editMenu;
