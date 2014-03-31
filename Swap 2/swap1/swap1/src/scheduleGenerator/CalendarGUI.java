@@ -1,6 +1,7 @@
 package scheduleGenerator;
 
 import java.awt.event.ActionEvent;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +33,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 	private int earliestYear, earliestMonth, earliestDay;
 	private int monthsAhead = 0;
 	private int yearsAhead = 0;
+	DateFormatSymbols dfs = new DateFormatSymbols();
+	private String weekdays[] = dfs.getWeekdays();
 
 	/**
 	 * Creates new form Calendar
@@ -376,28 +379,18 @@ public class CalendarGUI extends javax.swing.JFrame {
 		}
 
 	}
-	/*
+	
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Made static day class for all conversions to and from name/num to be done in.
+	
+	/* SWAP 1
 	 * SMELL: Switch statement-here it is using the number and switch statement to identify the day type
 	 * FIX:We create day classes and use polymorphism to identify the name of the day.
 	 */
 	private String getNameforNum(int n) {
-		switch (n) {
-		case (1):
-			return "Sunday";
-		case (2):
-			return "Monday";
-		case (3):
-			return "Tuesday";
-		case (4):
-			return "Wednesday";
-		case (5):
-			return "Thursday";
-		case (6):
-			return "Friday";
-		case (7):
-			return "Saturday";
-		}
-		return null;
+		
+		return weekdays[n];
 	}
 
 	private void initComponents() {
