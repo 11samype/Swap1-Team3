@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class DayTab extends JPanel {
 
     private javax.swing.JScrollPane sundayScrollPane = new JScrollPane();
@@ -20,10 +21,12 @@ public class DayTab extends JPanel {
 	private javax.swing.JList sundayJobList = new JList();
     private javax.swing.JTextField sundayJobName = new JTextField();
     private javax.swing.JLabel sundayLabel = new JLabel();
-    private DefaultListModel model = new DefaultListModel();
+    @SuppressWarnings("rawtypes")
+	private DefaultListModel model = new DefaultListModel();
     //Sunday 0
     
-    public DayTab(DefaultListModel m){
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public DayTab(DefaultListModel m){
         this.model = m;
         this.sundayJobList.setModel(this.model);
         
@@ -107,6 +110,7 @@ public class DayTab extends JPanel {
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public DefaultListModel getModel(){
 		return this.model;
 	}
