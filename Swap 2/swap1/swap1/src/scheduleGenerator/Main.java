@@ -10,6 +10,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.NavigableSet;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -188,7 +191,7 @@ public class Main {
 	 * ADDITIONAL FEATURE: we enable the system to save the schedule to the excel speadsheet
 	 * 
 	 */
-	public static void saveToExcel(){
+	public static void generateExcel(){
 		WritableWorkbook wworkbook;
 	      try {
 			wworkbook = Workbook.createWorkbook(new File("schedule.xls"));
@@ -199,7 +202,7 @@ public class Main {
 			for (String date : days) {
 				duties = schedule.getSchedule().get(date).navigableKeySet();
 				for (String duty : duties) {
-					Label label = new Label( 0,rowCount, date);
+					Label label = new Label( 0, rowCount, date);
 					Label label2 = new Label( 1, rowCount,duty);
 					Label label3 = new Label( 2, rowCount,schedule.getSchedule().get(date).get(duty).getName());
 					wsheet.addCell(label);
@@ -219,6 +222,57 @@ public class Main {
 		} catch (WriteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	      
+	}
+	
+	// SWAP 2, TEAM 03
+	// FURTHER ELABORATION
+	// Added option to save as XML, this is in addition to saving as Excel
+	public static void generateXML(){
+		FileOutputStream fos = null;
+		try {
+			XStream xstream = new XStream(new DomDriver());
+			
+			NavigableSet<String> days = schedule.getSchedule().navigableKeySet();
+			NavigableSet<String> duties = null;
+			
+			String xmlDoc =  "";
+			
+			for (String date : days) {
+				duties = schedule.getSchedule().get(date).navigableKeySet();
+				for (String duty : duties) {
+									
+					String xml = xstream.toXML(date).concat("\n");
+					
+					xmlDoc = xmlDoc.concat(xml);
+					
+					String xml2 = xstream.toXML(duty).concat("\n");
+					
+					xmlDoc = xmlDoc.concat(xml2);
+					
+					String xml3 = xstream.toXML(schedule.getSchedule().get(date).get(duty).getName()).concat("\n");
+					
+					xmlDoc = xmlDoc.concat(xml3);
+	
+				}
+			}
+			
+			fos = new FileOutputStream("calendar.xml");
+			fos.write("<?xml version=\"1.0\"?>".getBytes("UTF-8"));
+			byte[] bytes = xmlDoc.getBytes("UTF-8");
+			fos.write(bytes);
+			
+		} catch (Exception e) {
+			System.err.println("Error in XML Write: " + e.getMessage());
+		} finally {
+			if (fos != null) {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	      
 	}
