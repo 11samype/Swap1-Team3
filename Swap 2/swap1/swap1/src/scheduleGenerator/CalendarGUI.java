@@ -1,6 +1,7 @@
 package scheduleGenerator;
 
 import java.awt.event.ActionEvent;
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +33,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 	private int earliestYear, earliestMonth, earliestDay;
 	private int monthsAhead = 0;
 	private int yearsAhead = 0;
+	DateFormatSymbols dfs = new DateFormatSymbols();
+	private String weekdays[] = dfs.getWeekdays();
 
 	/**
 	 * Creates new form Calendar
@@ -52,7 +55,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 
 	private void setTitleMonth(Date date) {
 		/*
-		 * SWAP TEAM2 (JORDON/FRANCIS)
+		 * SWAP1 TEAM2 (JORDON/FRANCIS)
 		 * QUALITY CHANGES
 		 * There was a huge mess of a case statement here, repeating the same
 		 * lines for each month, which could easily be done away with by using
@@ -376,28 +379,18 @@ public class CalendarGUI extends javax.swing.JFrame {
 		}
 
 	}
-	/*
+	
+	// SWAP 2, TEAM 03
+	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
+	// Made static day class for all conversions to and from name/num to be done in.
+	
+	/* SWAP 1
 	 * SMELL: Switch statement-here it is using the number and switch statement to identify the day type
 	 * FIX:We create day classes and use polymorphism to identify the name of the day.
 	 */
 	private String getNameforNum(int n) {
-		switch (n) {
-		case (1):
-			return "Sunday";
-		case (2):
-			return "Monday";
-		case (3):
-			return "Tuesday";
-		case (4):
-			return "Wednesday";
-		case (5):
-			return "Thursday";
-		case (6):
-			return "Friday";
-		case (7):
-			return "Saturday";
-		}
-		return null;
+		
+		return weekdays[n];
 	}
 
 	private void initComponents() {
@@ -418,7 +411,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 		this.generateMenu = new javax.swing.JMenu();
 		this.genHtml = new javax.swing.JMenuItem();
 		this.generateText = new javax.swing.JMenuItem();
-		this.saveToExcel = new javax.swing.JMenuItem();
+		this.generateExcel = new javax.swing.JMenuItem();
+		this.generateXML = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Calendar");
@@ -479,14 +473,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 			}
 		});
 		this.fileMenu.add(this.saveChanges);
-		this.saveToExcel.setText("Save Excel");
-		this.saveToExcel.addActionListener(new java.awt.event.ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Main.saveToExcel();
-			}
-		});
-		this.fileMenu.add(this.saveToExcel);
+
 		this.undoChanges.setAccelerator(javax.swing.KeyStroke.getKeyStroke(
 				java.awt.event.KeyEvent.VK_Z,
 				java.awt.event.InputEvent.CTRL_MASK));
@@ -557,6 +544,24 @@ public class CalendarGUI extends javax.swing.JFrame {
 		this.generateMenu.add(this.generateText);
 
 		this.menuBar.add(this.generateMenu);
+		
+		this.generateExcel.setText("Generate Excel");
+		this.generateExcel.addActionListener(new java.awt.event.ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.generateExcel();
+			}
+		});
+		this.generateMenu.add(this.generateExcel);
+		
+		this.generateXML.setText("Generate XML");
+		this.generateXML.addActionListener(new java.awt.event.ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.generateXML();
+			}
+		});
+		this.generateMenu.add(this.generateXML);
 
 		setJMenuBar(this.menuBar);
 
@@ -702,53 +707,53 @@ public class CalendarGUI extends javax.swing.JFrame {
 	
 	// SWAP 2, TEAM 03
 	// REFACTORING FOR ENHANCMENT FROM BAD SMELL
-	// Feature Envy - moved here from Config
+	// Feature Envy - moved here from Config - moved to DayTab after
 	
-	 public void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
-	    	/*
-	    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
-	    	 * instead of here
-	    	 * Fix: move the function into the CalendarGUI.
-	    	 * 
-	    	 */
-	    	GroupLayout layout = new GroupLayout(tab);
-	    	tab.setLayout(layout);
-	    	layout.setHorizontalGroup(
-	    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(layout.createSequentialGroup()
-	                .addContainerGap()
-	                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                .addGap(18, 18, 18)
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addComponent(l)
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	                            .addGroup(layout.createSequentialGroup()
-	                                .addGap(14, 14, 14)
-	                                .addComponent(addJob))
-	                            .addGroup(layout.createSequentialGroup()
-	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-	                    .addComponent(deleteJob))
-	                .addContainerGap(431, Short.MAX_VALUE))
-	        );
-	    	layout.setVerticalGroup(
-	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-	            .addGroup(layout.createSequentialGroup()
-	                .addContainerGap()
-	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-	                    .addGroup(layout.createSequentialGroup()
-	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-	                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	                            .addComponent(l))
-	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	                        .addComponent(addJob)
-	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	                        .addComponent(deleteJob))
-	                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-	                .addContainerGap(25, Short.MAX_VALUE))
-	        );
-	    }
+//	 public void setTabLayout(JPanel tab, JScrollPane s, JLabel l, JButton addJob, JButton deleteJob, JTextField jobName) {
+//	    	/*
+//	    	 * SMELL: Feature Envy: this part of the code is highly related to the CalendarGUI it should be in the CalendarGUI 
+//	    	 * instead of here
+//	    	 * Fix: move the function into the CalendarGUI.
+//	    	 * 
+//	    	 */
+//	    	GroupLayout layout = new GroupLayout(tab);
+//	    	tab.setLayout(layout);
+//	    	layout.setHorizontalGroup(
+//	    			layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//	            .addGroup(layout.createSequentialGroup()
+//	                .addContainerGap()
+//	                .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+//	                .addGap(18, 18, 18)
+//	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//	                    .addGroup(layout.createSequentialGroup()
+//	                        .addComponent(l)
+//	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//	                            .addGroup(layout.createSequentialGroup()
+//	                                .addGap(14, 14, 14)
+//	                                .addComponent(addJob))
+//	                            .addGroup(layout.createSequentialGroup()
+//	                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//	                                .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+//	                    .addComponent(deleteJob))
+//	                .addContainerGap(431, Short.MAX_VALUE))
+//	        );
+//	    	layout.setVerticalGroup(
+//	            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//	            .addGroup(layout.createSequentialGroup()
+//	                .addContainerGap()
+//	                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+//	                    .addGroup(layout.createSequentialGroup()
+//	                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//	                            .addComponent(jobName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+//	                            .addComponent(l))
+//	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+//	                        .addComponent(addJob)
+//	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+//	                        .addComponent(deleteJob))
+//	                    .addComponent(s, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//	                .addContainerGap(25, Short.MAX_VALUE))
+//	        );
+//	    }
 
 	private javax.swing.JMenuItem editDays;
 	private javax.swing.JMenu editMenu;
@@ -764,7 +769,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 	private javax.swing.JPopupMenu popup;
 	private javax.swing.JButton previousMonthButton;
 	private javax.swing.JMenuItem saveChanges;
-	private javax.swing.JMenuItem saveToExcel;
+	private javax.swing.JMenuItem generateExcel;
+	private javax.swing.JMenuItem generateXML;
 	private javax.swing.JTable scheduleTable;
 	private javax.swing.JMenuItem undoChanges;
 }
