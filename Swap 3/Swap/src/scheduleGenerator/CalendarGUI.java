@@ -384,6 +384,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 			this.monthTitle.setFont(new java.awt.Font("Tahoma", 1, 24));
 			this.monthTitle.setText("Month Name Here");
 
+			this.menuBar.setBackground(this.color);
 			setJMenuBar(this.menuBar);
 			setLayout();
 
@@ -820,9 +821,11 @@ public class CalendarGUI extends javax.swing.JFrame {
 	private void changeColorActionPerformed(java.awt.event.ActionEvent evt) {
 		JMenuItem source = (JMenuItem) evt.getSource();
 		this.color = source.getBackground();
-		this.monthTitle.setText(this.cal.getDisplayName(Calendar.MONTH, Calendar.LONG,
-						this.locale) + " " + this.cal.get(Calendar.YEAR));
-		this.monthTitle.repaint();
+		
+		this.nextMonthButton.setBackground(this.color);
+		this.previousMonthButton.setBackground(this.color);
+		this.menuBar.setBackground(this.color);
+		
 		ConfigManager.setColor(this.color);
 		ConfigManager.dumpConfigFile();
 	}

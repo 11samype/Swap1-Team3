@@ -2,6 +2,10 @@ package scheduleGenerator;
 
 import java.awt.Color;
 
+//SWAP 3 TEAM 03
+// ENHANCEMENT FROM REFACTORING
+// color options - added class for color options menu text
+
 public enum NamedColor {
 	  BLUE(Color.BLUE, "Blue"),
 	  RED(Color.RED, "Red"),
