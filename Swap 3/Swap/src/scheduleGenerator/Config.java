@@ -4,6 +4,7 @@
  */
 package scheduleGenerator;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ import javax.swing.*;
 
 public class Config extends javax.swing.JFrame {
 
+	private Color color;
 	private boolean firstSelection = true;
 	private int numSelected = 0;
 	private DefaultListModel[] models;
@@ -55,7 +57,8 @@ public class Config extends javax.swing.JFrame {
 	 * 
 	 * @param days
 	 */
-	public Config(ArrayList<Day> days) {
+	public Config(ArrayList<Day> days, Color color) {
+		this.color = color;
 		this.models = new DefaultListModel[7];
 		initDyn();
 		initComponents();
@@ -113,7 +116,9 @@ public class Config extends javax.swing.JFrame {
 			this.weekJobName[i] = new JTextField();
 			this.weekLabel[i] = new JLabel();
 			this.weekAddJob[i] = new JButton();
+			this.weekAddJob[i].setBackground(this.color);
 			this.weekDeleteJob[i] = new JButton();
+			this.weekDeleteJob[i].setBackground(this.color);
 			this.weekTab[i] = new javax.swing.JPanel();
 		}
 	}
@@ -123,7 +128,9 @@ public class Config extends javax.swing.JFrame {
 		this.jPanel1 = new javax.swing.JPanel();
 		this.jLabel1 = new javax.swing.JLabel();
 		this.nextButton = new javax.swing.JButton();
+		this.nextButton.setBackground(this.color);
 		this.dayTabs = new javax.swing.JTabbedPane();
+		this.dayTabs.setBackground(this.color);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Configuration");

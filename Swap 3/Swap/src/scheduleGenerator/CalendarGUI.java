@@ -662,7 +662,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 	 * @param evt
 	 */
 	private void editWorkersActionPerformed(java.awt.event.ActionEvent evt) {
-		ConfigManager.wSet = new WorkerSetup(this.schedule.getWorkers());
+		ConfigManager.wSet = new WorkerSetup(this.schedule.getWorkers(), this.color);
 		ConfigManager.toggleWorkerSetup();
 		ConfigManager.toggleCalendar();
 	}
@@ -671,7 +671,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 	 * @param evt
 	 */
 	private void editDaysActionPerformed(java.awt.event.ActionEvent evt) {
-		ConfigManager.config = new Config(ConfigManager.getDays());
+		ConfigManager.config = new Config(ConfigManager.getDays(), this.color);
 		ConfigManager.toggleConfig();
 		ConfigManager.toggleCalendar();
 	}

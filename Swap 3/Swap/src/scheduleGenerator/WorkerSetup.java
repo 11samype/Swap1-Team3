@@ -1,5 +1,6 @@
 package scheduleGenerator;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -20,13 +21,15 @@ public class WorkerSetup extends javax.swing.JFrame {
 
 	private ArrayList<Day> days;
 	private ArrayList<JPanel> workerTabs;
+	private Color color;
 
 	/**
 	 * Allows for editing of already made workers.
 	 * 
 	 * @param workers
 	 */
-	public WorkerSetup(ArrayList<Worker> workers) {
+	public WorkerSetup(ArrayList<Worker> workers, Color color) {
+		this.color = color;
 		this.setPreferredSize(new Dimension(425, 450));
 		this.workerTabs = new ArrayList<JPanel>();
 		initComponents();
@@ -40,6 +43,7 @@ public class WorkerSetup extends javax.swing.JFrame {
 			nameArea.setText(workers.get(c).getName());
 			JTabbedPane daysPane = (JTabbedPane) this.workerTabs.get(c)
 					.getComponents()[0];
+			daysPane.setBackground(this.color);
 			for (int i = 0; i < daysPane.getTabCount(); i++) {
 				for (int n = 0; n < workers.get(c).getDays().size(); n++) {
 					if (daysPane.getTitleAt(i).equals(
@@ -275,10 +279,15 @@ public class WorkerSetup extends javax.swing.JFrame {
 	private void initComponents() {
 
 		this.workerTabPanel = new javax.swing.JTabbedPane();
+		this.workerTabPanel.setBackground(this.color);
 		this.addButton = new javax.swing.JButton();
+		this.addButton.setBackground(this.color);
 		this.removeButton = new javax.swing.JButton();
+		this.removeButton.setBackground(this.color);
 		this.nextButton = new javax.swing.JButton();
+		this.nextButton.setBackground(this.color);
 		this.backButton = new javax.swing.JButton();
+		this.backButton.setBackground(this.color);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Worker Setup");
