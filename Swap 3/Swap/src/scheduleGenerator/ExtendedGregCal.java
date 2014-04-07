@@ -1,8 +1,11 @@
 package scheduleGenerator;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -40,4 +43,44 @@ public class ExtendedGregCal extends GregorianCalendar {
 		return dayNum;
 	}
 
+	// SWAP 3, TEAM 03
+	// ENHANCEMENT FROM REFACTORING
+	// 1. The previous team claimed that the ability to add different methods to the calendar class such as
+	//	  days until next Holiday because the made this extended class.
+	// 2. The refactoring was successful towards building this enhancement because the class existed so the method 
+	//	  just needed to be added here but the feature was somewhat difficult to make becuase everything was done
+	//	  from scratch.
+	// 3. This enhancement adds some value to the system because the user could calculate how many days until the 
+	//	  the next holiday but in most cases that is not very helpful.
+	public static int DaysUntilNextHoliday(){
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		int minDays = 365;
+		for (Method method : Holidays.class.getMethods()){
+			Boolean okay = true;
+			Object o = null;
+				try {
+					o = method.invoke(null, year);
+				} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException|NullPointerException e) {
+					// TODO Auto-generated catch block 
+					okay = false;
+					//e.printStackTrace();
+				} 
+				
+				if(okay){
+					System.out.println(method.getName());
+					System.out.println(((Date) o).toString());
+					
+					int days = daysBetween(GregorianCalendar.getInstance().getTime(), ((Date) o)) + 1;
+					int temp = Math.min(minDays, days);
+					if (temp > -1){
+						minDays = temp;
+					}
+				}
+		}
+		return minDays;
+	}
+	
+	private static int daysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+}
 }

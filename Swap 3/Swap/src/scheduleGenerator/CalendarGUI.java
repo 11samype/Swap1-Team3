@@ -303,9 +303,19 @@ public class CalendarGUI extends javax.swing.JFrame {
 	// 3. While the refactoring was successful in eliminating the switch statement, it can be taken a step further by
 	//		eliminating the method completely and just using the DateFormatSymbols inline.
 
-	private String getNameforNum(int n) {
-		return ExtendedGregCal.DayString(n);
-	}
+	// SWAP 3, TEAM 03
+	// ENHANCEMENT FROM REFACTORING
+	// 1. The previous team claimed that references to the getNameforNum Method could be replaced with the
+	//	  in-line call to the the method in the ExtendGregCal class they made. This was an accurate statement
+	//	  as the method they called was only one line long.
+	// 2. The refactoring was successful towards building this enhancement because the method call just needed
+	//	  to be replaced with the steps inside the method.
+	// 3. This enhancement adds value to the system because the method name was just as descriptive as the code
+	//	  inside it so this adds cohesion to the overall system because the code does not jump to another section
+	//	  in this method for a simple procedure that can be done in-line.
+	//private String getNameforNum(int n) {
+	//	return ExtendedGregCal.DayString(n);
+	//}
 
 	// SWAP 1, TEAM 07
 	// SMELL: Long Method - could be broken up into a method for setting up each
@@ -845,7 +855,19 @@ public class CalendarGUI extends javax.swing.JFrame {
 								this.cal.get(Calendar.DAY_OF_MONTH))
 						+ "/"
 						+ String.format("%02d", this.cal.get(Calendar.YEAR));
-				String colTitle = this.getNameforNum(this.cal.get(Calendar.DAY_OF_WEEK)) + " (" + numDate + ")";
+				// SWAP 3, TEAM 03
+				// ENHANCEMENT FROM REFACTORING
+				// 1. The previous team claimed that references to the getNameforNum Method could be replaced with the
+				//	  in-line call to the the method in the ExtendGregCal class they made. This was an accurate statement
+				//	  as the method they called was only one line long.
+				// 2. The refactoring was successful towards building this enhancement because the method call just needed
+				//	  to be replaced with the steps inside the method.
+				// 3. This enhancement adds value to the system because the method name was just as descriptive as the code
+				//	  inside it so this adds cohesion to the overall system because the code does not jump to another section
+				//	  in this method for a simple procedure that can be done in-line.
+				// REPLACED THIS LINE: this.getNameforNum(this.cal.get(Calendar.DAY_OF_WEEK))
+				// WITH THIS LINE: ExtendedGregCal.DayString(this.cal.get(Calendar.DAY_OF_WEEK))
+				String colTitle = ExtendedGregCal.DayString(this.cal.get(Calendar.DAY_OF_WEEK)) + " (" + numDate + ")";
 				table.addColumn(colTitle, colData);
 			}
 			this.cal.add(Calendar.DATE, 1);
