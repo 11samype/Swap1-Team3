@@ -1,5 +1,6 @@
 package scheduleGenerator;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,6 +29,10 @@ import darrylbu.util.MenuScroller;
 // user needs.
 public class CalendarGUI extends javax.swing.JFrame {
 
+	// SWAP 3, TEAM 03
+	
+	private NamedColor[] colors = {NamedColor.WHITE, NamedColor.LIGHTGRAY, NamedColor.GRAY, NamedColor.DARKGRAY, NamedColor.BLACK, NamedColor.RED, NamedColor.PINK, NamedColor.ORANGE, NamedColor.YELLOW, NamedColor.GREEN, NamedColor.MAGENTA, NamedColor.CYAN, NamedColor.BLUE};
+	
 	// SWAP 1, TEAM 07
 	// QUALITY CHANGES
 
@@ -57,6 +62,8 @@ public class CalendarGUI extends javax.swing.JFrame {
 	// through generation based on Locale.
 	private Locale locale;
 
+	private Color color;
+
 	/**
 	 * Creates new form Calendar
 	 * 
@@ -66,7 +73,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 	// SWAP 2 TEAM 01 FURTHER ELABORATION
 	// CalendarGUI now takes a (possibly null for new user) locale for month names. This
 	// allows for loading a previously set locale.
-	public CalendarGUI(Schedule schd, Locale locale) {
+	public CalendarGUI(Schedule schd, Locale locale, Color color) {
 		this.schedule = schd;
 		this.scheduleMap = this.schedule.getSchedule();
 		String[] earliest = this.scheduleMap.firstKey().split("/");
@@ -75,6 +82,12 @@ public class CalendarGUI extends javax.swing.JFrame {
 		// this.earliestDay = Integer.parseInt(earliest[2]);
 		this.cal = new GregorianCalendar();
 		this.locale = locale == null ? Locale.getDefault() : locale;
+		
+		// SWAP 3 TEAM 03
+		// ENHANCEMENT FROM REFACTORING
+		// color options
+		
+		this.color = color == null ? color.LIGHT_GRAY : color;
 		initComponents();
 
 		// SWAP 1, TEAM 07
@@ -329,6 +342,12 @@ public class CalendarGUI extends javax.swing.JFrame {
 		// For now all that was done was for the code to be pulled out of this one
 		// method.
 		
+	// SWAP 3 TEAM 03
+	// ENHANCEMENT FROM REFACTORING
+	// color options - with everything split into it's own method, the ability to make
+	// color options in the menu is possible. So, that is what we did. The color 
+	// preference is saved in the config file.
+	
 		private void initComponents() {
 
 			this.monthTitle = new javax.swing.JLabel();
@@ -349,6 +368,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 			this.generateText = new javax.swing.JMenuItem();
 			this.preferencesMenu = new javax.swing.JMenu();
 			this.localeSubMenu = new javax.swing.JMenu();
+			this.colorSubMenu = new javax.swing.JMenu();
 			// this.localesPane = new javax.swing.JScrollPane();
 			// this.localesPaneMenu = new javax.swing.JMenu();
 			setUpScheduleTable();
@@ -395,6 +415,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 		}
 
 		private void setUpButtons() {
+			this.previousMonthButton.setBackground(this.color);
 			this.previousMonthButton.setText("<");
 			this.previousMonthButton
 					.addActionListener(new java.awt.event.ActionListener() {
@@ -404,6 +425,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 						}
 					});
 
+			this.nextMonthButton.setBackground(this.color);
 			this.nextMonthButton.setText(">");
 			this.nextMonthButton
 					.addActionListener(new java.awt.event.ActionListener() {
@@ -526,10 +548,38 @@ public class CalendarGUI extends javax.swing.JFrame {
 			this.preferencesMenu.setText("Preferences");
 			
 			this.preferencesMenu.add(createLocaleSubMenu());
+			
+			// SWAP 3 TEAM 03
+			// ENHANCEMENT FROM REFACTORING
+			// color options
+			
+			this.preferencesMenu.add(createColorSubMenu());
 
 			this.menuBar.add(this.preferencesMenu);
 		}
 		
+		// SWAP 3 TEAM 03
+		// ENHANCEMENT FROM REFACTORING
+		// color options
+		
+		private JMenu createColorSubMenu() {
+			this.colorSubMenu.setText("Color");
+			
+			for (NamedColor c : colors) {
+				JMenuItem item = new JMenuItem(c.getColorName());
+				item.setBackground(c.getAwtColor());
+				item.addActionListener(new java.awt.event.ActionListener() {
+					@Override
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						changeColorActionPerformed(evt);
+					}
+				});
+				this.colorSubMenu.add(item);
+			}
+			
+			return this.colorSubMenu;
+		}
+
 		// SWAP 2 TEAM 01 FURTHER ELABORATION
 		// The method below was extracted from setUpPreferencesMenu.
 		
@@ -766,6 +816,16 @@ public class CalendarGUI extends javax.swing.JFrame {
 		ConfigManager.setLocale(this.locale);
 		ConfigManager.dumpConfigFile();
 	}
+	
+	private void changeColorActionPerformed(java.awt.event.ActionEvent evt) {
+		JMenuItem source = (JMenuItem) evt.getSource();
+		this.color = source.getBackground();
+		this.monthTitle.setText(this.cal.getDisplayName(Calendar.MONTH, Calendar.LONG,
+						this.locale) + " " + this.cal.get(Calendar.YEAR));
+		this.monthTitle.repaint();
+		ConfigManager.setColor(this.color);
+		ConfigManager.dumpConfigFile();
+	}
 
 	private void editCell(Worker input) {
 		int i = this.scheduleTable.getSelectedRow();
@@ -901,4 +961,10 @@ public class CalendarGUI extends javax.swing.JFrame {
 	// a menu on the GUI.
 	private javax.swing.JMenu preferencesMenu;
 	private javax.swing.JMenu localeSubMenu;
+	
+	// SWAP 3, TEAM 03
+	// ENHANCEMENT FROM REFACTORING
+	// add color options
+	
+	private javax.swing.JMenu colorSubMenu;
 }

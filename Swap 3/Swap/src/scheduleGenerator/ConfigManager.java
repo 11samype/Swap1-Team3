@@ -1,5 +1,6 @@
 package scheduleGenerator;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,6 +29,7 @@ import java.util.Locale;
 //	See Main for details. Note that the main method has been renamed
 public class ConfigManager {
 
+	private static Color color;
 	private static Locale locale;
 	private static ArrayList<Day> days;
 	private static ArrayList<Worker> workers;
@@ -57,7 +59,7 @@ public class ConfigManager {
 		try {
 			recallConfigFile();
 			if(getSchedule() != (null)){
-				cal = new CalendarGUI(getSchedule(), getLocale());
+				cal = new CalendarGUI(getSchedule(), getLocale(), getColor());
 				cal.setVisible(true);
 			} else{
 				config.setVisible(true);
@@ -185,6 +187,7 @@ public class ConfigManager {
 			fileStore.writeObject(days);
 			fileStore.writeObject(workers);
 			fileStore.writeObject(locale);
+			fileStore.writeObject(color);
 			fileStore.writeObject(schedule);
 			fileStore.writeObject(HTMLGenerator.getTables());
 			fileStore.close();
@@ -213,11 +216,29 @@ public class ConfigManager {
 			days = (ArrayList<Day>) fileRecall.readObject();
 			workers = (ArrayList<Worker>) fileRecall.readObject();
 			locale = (Locale) fileRecall.readObject();
+			// SWAP 3 TEAM 03
+			// ENHANCEMENT FROM REFACTORING
+			// color options - load color
+			color = (Color) fileRecall.readObject();
 			schedule = (Schedule) fileRecall.readObject();
+			
 			HTMLGenerator.setTables((String)fileRecall.readObject());
 			
 			fileRecall.close();
 			recallConfig.close();
 		}
+	}
+	
+	// SWAP 3 TEAM 03
+	// ENHANCEMENT FROM REFACTORING
+	// color options - methods
+
+	public static void setColor(Color color2) {
+		color = color2;
+		
+	}
+	
+	public static Color getColor() {
+		return color;
 	}
 }
