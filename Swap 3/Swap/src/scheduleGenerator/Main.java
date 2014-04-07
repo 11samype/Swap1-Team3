@@ -31,31 +31,30 @@ public class Main {
 	public static void main(String[] args) {
 		//Create a file chooser
 		
-		ExtendedGregCal.DaysUntilNextHoliday();
-//		File file = new File("schedule_data.ser");
-//		final JFileChooser fc = new JFileChooser(file);
-//		fc.setMultiSelectionEnabled(false);
-//
-//		//In response to a button click:
-//		int returnVal = fc.showOpenDialog(new JFrame());
-//
-//        if (returnVal == JFileChooser.APPROVE_OPTION) {
-//            file = fc.getSelectedFile();
-//            while (!SerFileFilter.accept(file)){
-//            	JOptionPane.showMessageDialog(new JFrame(), "Please Choose a file with a \".ser\" extension.");
-//            	returnVal = fc.showOpenDialog(new JFrame());
-//                if (returnVal == JFileChooser.APPROVE_OPTION) {
-//                    file = fc.getSelectedFile();
-//                    System.out.println(file.getName());
-//                }else
-//                {
-//                	System.out.println("Open command cancelled by user.");
-//                	break;
-//                }
-//            }
-//        } else {
-//            System.out.println("Open command cancelled by user.");
-//        }
-//		ConfigManager.initializeConfig(file.getName());
+		File file = new File("schedule_data.ser");
+		final JFileChooser fc = new JFileChooser(file);
+		fc.setMultiSelectionEnabled(false);
+
+		//In response to a button click:
+		int returnVal = fc.showOpenDialog(new JFrame());
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+            while (!SerFileFilter.accept(file)){
+            	JOptionPane.showMessageDialog(new JFrame(), "Please Choose a file with a \".ser\" extension.");
+            	returnVal = fc.showOpenDialog(new JFrame());
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    file = fc.getSelectedFile();
+                    System.out.println(file.getName());
+                }else
+                {
+                	System.out.println("Open command cancelled by user.");
+                	break;
+                }
+            }
+        } else {
+            System.out.println("Open command cancelled by user.");
+        }
+		ConfigManager.initializeConfig(file.getName());
 	}
 }

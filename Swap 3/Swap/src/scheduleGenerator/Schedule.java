@@ -25,6 +25,7 @@ public class Schedule extends Thread implements Serializable {
 	private ExtendedGregCal cal;
 	private HashMap<Integer, ArrayList<Worker>> workerIndices;
 	private boolean workerForEveryJob = true;
+	private static final long serialVersionUID = 770285657387810437L;
 
 	/**
 	 * Used to construct an initial schedule, used if one does not exist.

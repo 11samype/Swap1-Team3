@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class ExtendedGregCal extends GregorianCalendar {
+	private static final long serialVersionUID = 6276733575936162057L;
 	
 	public ExtendedGregCal() {
 		super();
@@ -60,7 +61,19 @@ public class ExtendedGregCal extends GregorianCalendar {
 			Object o = null;
 				try {
 					o = method.invoke(null, year);
-				} catch (IllegalAccessException|IllegalArgumentException|InvocationTargetException|NullPointerException e) {
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block 
+					okay = false;
+					//e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block 
+					okay = false;
+					//e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block 
+					okay = false;
+					//e.printStackTrace();
+				} catch (NullPointerException e) {
 					// TODO Auto-generated catch block 
 					okay = false;
 					//e.printStackTrace();
